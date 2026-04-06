@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class StudyClub extends Model
+{
+    protected $fillable = ['category_id', 'coach_id', 'name', 'slug', 'description', 'banner_image', 'is_active'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function coach()
+    {
+        return $this->belongsTo(User::class, 'coach_id');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'study_club_user');
+    }
+}
