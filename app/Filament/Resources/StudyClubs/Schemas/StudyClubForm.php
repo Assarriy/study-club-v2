@@ -36,7 +36,9 @@ class StudyClubForm
                 FileUpload::make('banner_image')
                     ->image()
                     ->directory('study-club-banners')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->disk('public')
+                    ->directory('study-club-banners'),
                 RichEditor::make('description')
                     ->columnSpanFull(),
                 Toggle::make('is_active')
