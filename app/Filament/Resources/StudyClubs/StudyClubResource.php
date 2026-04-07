@@ -5,6 +5,7 @@ namespace App\Filament\Resources\StudyClubs;
 use App\Filament\Resources\StudyClubs\Pages\CreateStudyClub;
 use App\Filament\Resources\StudyClubs\Pages\EditStudyClub;
 use App\Filament\Resources\StudyClubs\Pages\ListStudyClubs;
+use App\Filament\Resources\StudyClubs\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\StudyClubs\Schemas\StudyClubForm;
 use App\Filament\Resources\StudyClubs\Tables\StudyClubsTable;
 use App\Models\StudyClub;
@@ -34,7 +35,7 @@ class StudyClubResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StudentsRelationManager::class
         ];
     }
 

@@ -26,7 +26,7 @@ class User extends Authenticatable
         return $this->hasMany(StudyClub::class, 'coach_id');
     }
 
-    public function joinedClubs()
+    public function studyClubs()
     {
         return $this->belongsToMany(StudyClub::class, 'study_club_user');
     }
