@@ -6,7 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudyClub extends Model
 {
-    protected $fillable = ['category_id', 'coach_id', 'name', 'slug', 'description', 'banner_image', 'is_active'];
+    protected $fillable = [
+        'category_id',
+        'coach_id',
+        'name',
+        'slug',
+        'description',
+        'about',
+        'vision',
+        'mission',
+        'social_links', // Tambahan baru
+        'banner_image',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'social_links' => 'array', // Agar otomatis jadi array saat dipanggil
+    ];
+
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class);
+    }
 
     public function category()
     {
