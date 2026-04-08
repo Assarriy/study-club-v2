@@ -43,4 +43,16 @@ class StudyClub extends Model
     {
         return $this->belongsToMany(User::class, 'study_club_user');
     }
+
+    // Relasi ke berita
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    // Relasi ke galeri
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class);
+    }
 }
