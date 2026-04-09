@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Registration;
 use App\Models\StudyClub;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontEndController extends Controller
 {
@@ -46,5 +48,40 @@ class FrontEndController extends Controller
             ->firstOrFail();
 
         return view('club.show', compact('club'));
+    }
+
+    public function register(Request $request, $slug)
+    {
+        // Validasi input
+        $request->validate([
+            'motivation' => 'required|string|min:10|max:1000',
+        ]);
+
+        $club = StudyClub::where('slug', $slug)->firstOrFail();
+
+        // Cek apakah siswa sudah pernah mendaftar di club ini
+        $existingRegistration = Registration::where('user_id', Auth::id())
+            ->where('study_club_id', $club->id)
+            ->first();
+
+        if ($existingRegistration) {
+            return back()->with('error', 'Kamu sudah mendaftar di club ini. Status lamaranmu saat ini: ' . strtoupper($existingRegistration->status));
+        }
+
+        // Cek apakah siswa sudah menjadi anggota aktif (ada di tabel study_club_user)
+        $isMember = $club->students()->where('user_id', Auth::id())->exists();
+        if ($isMember) {
+            return back()->with('error', 'Kamu sudah berstatus sebagai anggota aktif di club ini.');
+        }
+
+        // Simpan data pendaftaran
+        Registration::create([
+            'user_id' => Auth::id(),
+            'study_club_id' => $club->id,
+            'motivation' => $request->motivation,
+            'status' => 'pending',
+        ]);
+
+        return back()->with('success', 'Pendaftaran berhasil dikirim! Silakan tunggu review dan persetujuan dari Coach.');
     }
 }

@@ -10,3 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontEndController::class, 'index'])->name('home');
 
 Route::get('/club/{slug}', [FrontEndController::class, 'show'])->name('club.show');
+
+Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])
+    ->name('club.register')
+    ->middleware('auth');

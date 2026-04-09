@@ -67,4 +67,9 @@ class StudyClub extends Model
     {
         return $this->hasMany(Material::class);
     }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
 }

@@ -7,6 +7,7 @@ use App\Filament\Resources\StudyClubs\Pages\EditStudyClub;
 use App\Filament\Resources\StudyClubs\Pages\ListStudyClubs;
 use App\Filament\Resources\StudyClubs\RelationManagers\AchievementsRelationManager;
 use App\Filament\Resources\StudyClubs\RelationManagers\MaterialsRelationManager;
+use App\Filament\Resources\StudyClubs\RelationManagers\RegistrationsRelationManager;
 use App\Filament\Resources\StudyClubs\RelationManagers\SchedulesRelationManager;
 use App\Filament\Resources\StudyClubs\RelationManagers\StudentsRelationManager;
 use App\Filament\Resources\StudyClubs\Schemas\StudyClubForm;
@@ -42,6 +43,7 @@ class StudyClubResource extends Resource
             AchievementsRelationManager::class,
             SchedulesRelationManager::class,
             MaterialsRelationManager::class,
+            RegistrationsRelationManager::class,
         ];
     }
 

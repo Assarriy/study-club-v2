@@ -76,6 +76,56 @@
 
             <div class="lg:col-span-2 space-y-12">
 
+                @if(session('success'))
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-2xl flex items-center gap-3 shadow-sm">
+                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="font-semibold">{{ session('success') }}</span>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-2xl flex items-center gap-3 shadow-sm">
+                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="font-semibold">{{ session('error') }}</span>
+                    </div>
+                @endif
+
+                <section class="bg-gradient-to-br from-white to-blue-50/50 rounded-3xl p-8 shadow-md border border-blue-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    
+                    <h2 class="text-2xl font-bold text-brand-blue mb-2 relative z-10">Tertarik Bergabung?</h2>
+                    <p class="text-slate-500 mb-6 relative z-10">Tuliskan motivasimu dan jadilah bagian dari keluarga besar {{ $club->name }}.</p>
+
+                    @auth
+                        <form action="{{ route('club.register', $club->slug) }}" method="POST" class="relative z-10">
+                            @csrf
+                            <div class="mb-4">
+                                <label for="motivation" class="block text-sm font-bold text-slate-700 mb-2">Motivasi & Alasan Bergabung <span class="text-red-500">*</span></label>
+                                <textarea name="motivation" id="motivation" rows="4" 
+                                    class="w-full rounded-xl border-slate-200 shadow-sm focus:border-brand-blue focus:ring focus:ring-brand-blue/20 p-4 transition text-sm" 
+                                    placeholder="Ceritakan mengapa kamu ingin bergabung dengan club ini dan apa yang ingin kamu capai..." required></textarea>
+                                @error('motivation')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <button type="submit" class="w-full sm:w-auto bg-brand-blue text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-900/30 transition-all transform hover:-translate-y-0.5">
+                                Kirim Pendaftaran
+                            </button>
+                        </form>
+                    @else
+                        <div class="bg-white/80 backdrop-blur border border-slate-100 p-6 rounded-2xl text-center relative z-10 shadow-sm">
+                            <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <h3 class="font-bold text-slate-800 mb-2">Login Diperlukan</h3>
+                            <p class="text-sm text-slate-500 mb-4">Kamu harus masuk menggunakan akun siswa untuk bisa mendaftar ke study club ini.</p>
+                            <a href="/admin/login" class="inline-block bg-brand-yellow text-brand-blue font-bold py-2.5 px-6 rounded-full hover:bg-yellow-400 transition shadow-sm">
+                                Login Sekarang
+                            </a>
+                        </div>
+                    @endauth
+                </section>  
+
                 <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
                     <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2"
                         style="color: {{ $club->category->color_theme ?? '#1E3A8A' }}">
