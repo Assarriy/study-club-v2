@@ -55,4 +55,16 @@ class StudyClub extends Model
     {
         return $this->hasMany(Gallery::class);
     }
+
+    // Relasi ke jadwal kegiatan
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    // Relasi ke materi/unduhan
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
 }
