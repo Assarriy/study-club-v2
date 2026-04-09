@@ -8,3 +8,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [FrontEndController::class, 'index'])->name('home');
+
+Route::get('/club/{slug}', [FrontEndController::class, 'show'])->name('club.show');
