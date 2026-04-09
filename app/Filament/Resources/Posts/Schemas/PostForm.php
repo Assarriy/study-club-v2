@@ -34,7 +34,8 @@ class PostForm
                             ->unique(ignoreRecord: true),
                         FileUpload::make('image')
                             ->image()
-                            ->directory('posts'),
+                            ->directory('posts')
+                            ->disk('public'),
                         RichEditor::make('content')
                             ->required()
                             ->columnSpanFull(),

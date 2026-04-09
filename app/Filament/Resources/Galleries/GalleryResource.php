@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class GalleryResource extends Resource
 {
@@ -44,5 +45,16 @@ class GalleryResource extends Resource
             'create' => CreateGallery::route('/create'),
             'edit' => EditGallery::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (auth()->user()->hasRole('coach') && !auth()->user()->hasRole('super_admin')) {
+            return $query->whereHas('studyClub', function ($q) {
+                $q->where('coach_id', auth()->id());
+            });
+        }
+        return $query;
     }
 }

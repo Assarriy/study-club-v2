@@ -46,8 +46,7 @@ class StudyClubForm
                                     ->image()
                                     ->directory('study-club-banners')
                                     ->columnSpanFull()
-                                    ->disk('public')
-                                    ->directory('study-club-banners'),
+                                    ->disk('public'),
                                 RichEditor::make('description')
                                     ->columnSpanFull(),
                                 Toggle::make('is_active')
