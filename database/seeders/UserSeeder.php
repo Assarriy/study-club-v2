@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -14,13 +15,39 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::create(['name' => 'Super Admin', 'email' => 'admin@admin.com', 'password' => Hash::make('password')]);
-        $admin->assignRole('super_admin');
+        // 1. Pastikan role-nya dibuat dulu di database
+        $roleSuperAdmin = Role::firstOrCreate(['name' => 'super_admin']);
+        $roleCoach = Role::firstOrCreate(['name' => 'coach']);
+        $roleSiswa = Role::firstOrCreate(['name' => 'siswa']);
 
-        $coach = User::create(['name' => 'Coach Kimia', 'email' => 'coach@coach.com', 'password' => Hash::make('password')]);
-        $coach->assignRole('coach');
+        // 2. Buat User Super Admin
+        $superAdmin = User::updateOrCreate(
+            ['email' => 'admin@admin.com'], // Cek berdasarkan email
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('password'),
+            ]
+        );
+        $superAdmin->assignRole($roleSuperAdmin); // Pasang role-nya!
 
-        $student = User::create(['name' => 'Siswa', 'email' => 'siswa@siswa.com', 'password' => Hash::make('password')]);
-        $student->assignRole('student');
+        // 3. Buat User Coach
+        $coach = User::updateOrCreate(
+            ['email' => 'coach@guru.com'],
+            [
+                'name' => 'Bapak Coach Kimia',
+                'password' => Hash::make('password'),
+            ]
+        );
+        $coach->assignRole($roleCoach); // Pasang role-nya!
+
+        // 4. Buat User Siswa
+        $siswa = User::updateOrCreate(
+            ['email' => 'siswa@siswa.com'],
+            [
+                'name' => 'Siswa Teladan',
+                'password' => Hash::make('password'),
+            ]
+        );
+        $siswa->assignRole($roleSiswa); // Pasang role-nya!
     }
 }
