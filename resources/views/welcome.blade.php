@@ -44,24 +44,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3">
                     <a href="#katalog"
-                        class="hidden md:block text-slate-600 hover:text-brand-blue font-semibold transition">Katalog
+                        class="hidden md:block text-slate-600 hover:text-brand-blue font-semibold transition mr-3">Katalog
                         Club</a>
-                    <a href="#benefit"
-                        class="hidden md:block text-slate-600 hover:text-brand-blue font-semibold transition">Benefit</a>
-                    <div class="h-6 w-px bg-slate-300 hidden md:block"></div>
-                    <a href="/admin"
-                        class="group relative px-6 py-2.5 font-bold text-white rounded-full overflow-hidden bg-brand-blue hover:shadow-lg hover:shadow-blue-500/30 transition-all">
-                        <span class="relative z-10 group-hover:text-white">Masuk Portal</span>
-                        <div
-                            class="absolute inset-0 h-full w-0 bg-brand-yellow transition-all duration-300 ease-out group-hover:w-full z-0">
-                        </div>
-                        <span
-                            class="absolute inset-0 flex items-center justify-center z-10 text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">Masuk
-                            Portal</span>
-                    </a>
+
+                    @auth
+                        <a href="/admin" class="text-sm font-bold text-brand-blue hover:text-blue-800 transition">Dashboard
+                            Saya</a>
+                        <form action="{{ route('logout.frontend') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit"
+                                class="bg-red-50 text-red-600 text-sm font-bold px-4 py-2 rounded-full hover:bg-red-100 transition">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="text-slate-600 hover:text-brand-blue font-semibold transition px-4 py-2">Daftar</a>
+                        <a href="/admin"
+                            class="group relative px-6 py-2.5 font-bold text-white rounded-full overflow-hidden bg-brand-blue hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+                            <span class="relative z-10 group-hover:text-white">Masuk</span>
+                            <div
+                                class="absolute inset-0 h-full w-0 bg-brand-yellow transition-all duration-300 ease-out group-hover:w-full z-0">
+                            </div>
+                            <span
+                                class="absolute inset-0 flex items-center justify-center z-10 text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">Masuk</span>
+                        </a>
+                    @endauth
                 </div>
+
             </div>
         </div>
     </nav>
@@ -182,7 +192,8 @@
 
                     <div class="p-6 flex flex-col flex-grow z-10">
                         <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-blue transition-colors">
-                            {{ $club->name }}</h3>
+                            {{ $club->name }}
+                        </h3>
                         <p class="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
                             {!! strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' !!}
                         </p>
