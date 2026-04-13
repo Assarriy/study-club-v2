@@ -52,36 +52,44 @@ class FrontEndController extends Controller
 
     public function register(Request $request, $slug)
     {
-        // Validasi input
         $request->validate([
             'motivation' => 'required|string|min:10|max:1000',
         ]);
 
-        $club = StudyClub::where('slug', $slug)->firstOrFail();
+        $club = StudyClub::with('coach')->where('slug', $slug)->firstOrFail();
+        $user = Auth::user();
 
-        // Cek apakah siswa sudah pernah mendaftar di club ini
-        $existingRegistration = Registration::where('user_id', Auth::id())
-            ->where('study_club_id', $club->id)
-            ->first();
-
-        if ($existingRegistration) {
-            return back()->with('error', 'Kamu sudah mendaftar di club ini. Status lamaranmu saat ini: ' . strtoupper($existingRegistration->status));
+        // Cek duplikasi pendaftaran (sama seperti sebelumnya)
+        $existing = Registration::where('user_id', $user->id)->where('study_club_id', $club->id)->first();
+        if ($existing) {
+            return back()->with('error', 'Kamu sudah mendaftar di club ini.');
         }
 
-        // Cek apakah siswa sudah menjadi anggota aktif (ada di tabel study_club_user)
-        $isMember = $club->students()->where('user_id', Auth::id())->exists();
-        if ($isMember) {
-            return back()->with('error', 'Kamu sudah berstatus sebagai anggota aktif di club ini.');
-        }
-
-        // Simpan data pendaftaran
+        // Simpan ke Database
         Registration::create([
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'study_club_id' => $club->id,
             'motivation' => $request->motivation,
             'status' => 'pending',
         ]);
 
-        return back()->with('success', 'Pendaftaran berhasil dikirim! Silakan tunggu review dan persetujuan dari Coach.');
+        // --- LOGIK WHATSAPP ---
+        $coachPhone = $club->coach->phone ?? '628123456789'; // Nomor default jika coach belum isi HP
+
+        // Pastikan nomor diawali 62 bukan 0
+        if (str_starts_with($coachPhone, '0')) {
+            $coachPhone = '62' . substr($coachPhone, 1);
+        }
+
+        $message = "Halo Coach *" . $club->coach->name . "*,\n\n";
+        $message .= "Saya *" . $user->name . "* ingin mendaftar ke Study Club *" . $club->name . "*.\n\n";
+        $message .= "*Motivasi:* \n" . $request->motivation . "\n\n";
+        $message .= "Mohon untuk ditinjau pendaftaran saya di sistem. Terima kasih!";
+
+        // Encode pesan agar aman untuk URL
+        $waUrl = "https://api.whatsapp.com/send?phone=" . $coachPhone . "&text=" . urlencode($message);
+
+        // Redirect ke WhatsApp
+        return redirect()->away($waUrl);
     }
 }

@@ -111,6 +111,9 @@
                             <button type="submit" class="w-full sm:w-auto bg-brand-blue text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-800 hover:shadow-lg hover:shadow-blue-900/30 transition-all transform hover:-translate-y-0.5">
                                 Kirim Pendaftaran
                             </button>
+                            <p class="text-[10px] text-slate-400 mt-3 italic">
+                                *Setelah klik daftar, kamu akan diarahkan ke WhatsApp Coach untuk konfirmasi cepat.
+                             </p>
                         </form>
                     @else
                         <div class="bg-white/80 backdrop-blur border border-slate-100 p-6 rounded-2xl text-center relative z-10 shadow-sm">

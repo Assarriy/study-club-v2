@@ -19,6 +19,12 @@ class UserForm
                     ->required()
                     ->maxLength(255),
 
+                TextInput::make('phone')
+                    ->label('Nomor WhatsApp')
+                    ->tel() // Munculin keypad angka di HP
+                    ->placeholder('Contoh: 628123456789')
+                    ->maxLength(20),
+
                 TextInput::make('email')
                     ->label('Alamat Email')
                     ->email()

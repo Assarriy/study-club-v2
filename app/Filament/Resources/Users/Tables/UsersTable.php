@@ -21,6 +21,10 @@ class UsersTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('phone')
+                    ->label('Nomor WhatsApp')
+                    ->copyable(),
+
                 TextColumn::make('email')
                     ->label('Email')
                     ->searchable(),
