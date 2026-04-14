@@ -105,7 +105,7 @@
 
             <p class="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">
                 Platform resmi manajemen kegiatan ekstrakurikuler dan study club. Pilih mentor terbaikmu, kembangkan
-                *skill* spesifik, dan bangun portofolio sejak dini.
+                'skill' spesifik, dan bangun portofolio sejak dini.
             </p>
 
             <div
@@ -195,7 +195,7 @@
                             {{ $club->name }}
                         </h3>
                         <p class="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
-                            {!! strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' !!}
+                            {{ strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' }}
                         </p>
 
                         <div class="pt-5 border-t border-slate-100 flex items-center justify-between mt-auto">

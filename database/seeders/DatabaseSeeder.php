@@ -19,12 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             UserSeeder::class,
-            // AchievementSeeder::class,
-            // GallerySeeder::class,
-            // MaterialSeeder::class,
-            // PostSeeder::class,
-            // ScheduleSeeder::class,
-            // StudyClubProfileSeeder::class,
+            ContentSeeder::class,
         ]);
     }
 }

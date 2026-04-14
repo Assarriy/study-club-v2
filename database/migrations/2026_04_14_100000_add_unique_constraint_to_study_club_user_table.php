@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->nullable()->after('email');
+        Schema::table('study_club_user', function (Blueprint $table) {
+            $table->unique(['study_club_id', 'user_id']);
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('phone');
+        Schema::table('study_club_user', function (Blueprint $table) {
+            $table->dropUnique(['study_club_id', 'user_id']);
         });
     }
 };
