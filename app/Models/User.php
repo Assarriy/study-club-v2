@@ -2,46 +2,29 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Filament\Panel;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
 class User extends Authenticatable implements FilamentUser
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 
-    protected $fillable = ['name', 'email', 'password', 'phone'];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'password',
+    ];
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    public function coachedClubs()
-    {
-        return $this->hasMany(StudyClub::class, 'coach_id');
-    }
-
-    public function studyClubs()
-    {
-        return $this->belongsToMany(StudyClub::class, 'study_club_user');
-    }
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->hasRole(['super_admin', 'coach']);
-    }
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -50,8 +33,22 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    // Relasi ke Study Club (sebagai Anggota)
+    public function studyClubs()
+    {
+        return $this->belongsToMany(StudyClub::class, 'study_club_user');
+    }
+
+    // Relasi ke tabel Pendaftaran (Antrean)
     public function registrations()
     {
         return $this->hasMany(Registration::class);
+    }
+
+    // --- FILAMENT GATEKEEPER ---
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // Buka gerbang untuk 3 role ini
+        return $this->hasRole(['super_admin', 'coach', 'siswa']);
     }
 }

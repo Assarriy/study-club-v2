@@ -44,34 +44,37 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flex items-center gap-3">
                     <a href="#katalog"
                         class="hidden md:block text-slate-600 hover:text-brand-blue font-semibold transition mr-3">Katalog
                         Club</a>
 
                     @auth
-                        <a href="/admin" class="text-sm font-bold text-brand-blue hover:text-blue-800 transition">Dashboard
-                            Saya</a>
-                        <form action="{{ route('logout.frontend') }}" method="POST" class="inline">
-                            @csrf
-                            <button type="submit"
-                                class="bg-red-50 text-red-600 text-sm font-bold px-4 py-2 rounded-full hover:bg-red-100 transition">Logout</button>
-                        </form>
-                    @else
-                        <a href="{{ route('register') }}"
-                            class="text-slate-600 hover:text-brand-blue font-semibold transition px-4 py-2">Daftar</a>
                         <a href="/admin"
                             class="group relative px-6 py-2.5 font-bold text-white rounded-full overflow-hidden bg-brand-blue hover:shadow-lg hover:shadow-blue-500/30 transition-all">
-                            <span class="relative z-10 group-hover:text-white">Masuk</span>
+                            <span class="relative z-10 group-hover:text-white">Ke Dashboard</span>
                             <div
                                 class="absolute inset-0 h-full w-0 bg-brand-yellow transition-all duration-300 ease-out group-hover:w-full z-0">
                             </div>
                             <span
-                                class="absolute inset-0 flex items-center justify-center z-10 text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">Masuk</span>
+                                class="absolute inset-0 flex items-center justify-center z-10 text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">Dashboard
+                                Saya</span>
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="text-slate-600 hover:text-brand-blue font-semibold transition px-4 py-2">Daftar Akun</a>
+                        <a href="{{ route('login') }}"
+                            class="group relative px-6 py-2.5 font-bold text-white rounded-full overflow-hidden bg-brand-blue hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+                            <span class="relative z-10 group-hover:text-white">Login</span>
+                            <div
+                                class="absolute inset-0 h-full w-0 bg-brand-yellow transition-all duration-300 ease-out group-hover:w-full z-0">
+                            </div>
+                            <span
+                                class="absolute inset-0 flex items-center justify-center z-10 text-brand-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300">Login</span>
                         </a>
                     @endauth
                 </div>
-
             </div>
         </div>
     </nav>
@@ -87,6 +90,7 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-slate-600 font-semibold text-sm mb-8 animate-bounce"
                 style="animation-duration: 3s;">
                 <span class="flex h-3 w-3 relative">
@@ -105,7 +109,7 @@
 
             <p class="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">
                 Platform resmi manajemen kegiatan ekstrakurikuler dan study club. Pilih mentor terbaikmu, kembangkan
-                'skill' spesifik, dan bangun portofolio sejak dini.
+                skill spesifik, dan bangun portofolio sejak dini.
             </p>
 
             <div
@@ -162,6 +166,7 @@
             @forelse($clubs as $club)
                 <a href="{{ route('club.show', $club->slug) }}"
                     class="bg-white rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 overflow-hidden group hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative block">
+
                     <div
                         class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-brand-yellow/20 to-transparent rounded-bl-full z-0">
                     </div>
@@ -195,7 +200,7 @@
                             {{ $club->name }}
                         </h3>
                         <p class="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
-                            {{ strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' }}
+                            {!! strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' !!}
                         </p>
 
                         <div class="pt-5 border-t border-slate-100 flex items-center justify-between mt-auto">
@@ -257,10 +262,17 @@
                 Jangan lewatkan kesempatan untuk belajar hal baru, bertemu teman sehobi, dan dibimbing oleh
                 mentor-mentor hebat.
             </p>
-            <a href="/admin"
-                class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
-                Daftar Sekarang
-            </a>
+            @auth
+                <a href="/admin"
+                    class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
+                    Ke Dashboard Saya
+                </a>
+            @else
+                <a href="{{ route('register') }}"
+                    class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
+                    Daftar Sekarang
+                </a>
+            @endauth
         </div>
     </div>
 
@@ -284,9 +296,9 @@
                 <div>
                     <h4 class="font-bold text-slate-900 mb-4">Menu Cepat</h4>
                     <ul class="space-y-3 text-slate-500">
-                        <li><a href="#" class="hover:text-brand-blue transition">Beranda</a></li>
+                        <li><a href="/" class="hover:text-brand-blue transition">Beranda</a></li>
                         <li><a href="#katalog" class="hover:text-brand-blue transition">Katalog Club</a></li>
-                        <li><a href="/admin" class="hover:text-brand-blue transition">Portal Login</a></li>
+                        <li><a href="/admin" class="hover:text-brand-blue transition">Portal Login Admin</a></li>
                     </ul>
                 </div>
                 <div>
