@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [FrontEndController::class, 'index'])->name('home');
-
+Route::get('/search', [FrontEndController::class, 'search'])->name('search');
+Route::get('/filter-category/{categoryId?}', [FrontEndController::class, 'filterByCategory'])->name('filter.category');
 Route::get('/club/{slug}', [FrontEndController::class, 'show'])->name('club.show');
 
 Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])
