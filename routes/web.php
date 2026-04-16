@@ -1,26 +1,39 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\AuthController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
+// ==========================================
+// ROUTE PUBLIK (Landing Page & Detail)
+// ==========================================
 Route::get('/', [FrontEndController::class, 'index'])->name('home');
-
 Route::get('/club/{slug}', [FrontEndController::class, 'show'])->name('club.show');
 
-Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])
-    ->name('club.register')
-    ->middleware('auth');
-
-// Route khusus untuk tamu (belum login)
+// ==========================================
+// ROUTE GUEST (Untuk yang BELUM login)
+// ==========================================
 Route::middleware('guest')->group(function () {
+    // Form Pendaftaran Akun Siswa Baru
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
+    // Redirect /login otomatis ke portal Filament
+    Route::get('/login', function () {
+        return redirect('/admin/login');
+    })->name('login');
 });
 
-// Route khusus Logout
-Route::post('/logout-frontend', [AuthController::class, 'logout'])->name('logout.frontend');
+// ==========================================
+// ROUTE AUTH (Untuk Mendaftar Club)
+// ==========================================
+Route::middleware('auth')->group(function () {
+    // Proses Siswa Mendaftar ke Study Club dari Front-End
+    Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])->name('club.register');
+});

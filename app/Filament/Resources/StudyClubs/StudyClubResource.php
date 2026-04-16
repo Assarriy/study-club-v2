@@ -60,13 +60,22 @@ class StudyClubResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        // Cek apakah yang login adalah Coach (tapi bukan super_admin)
-        if (auth()->user()->hasRole('coach') && !auth()->user()->hasRole('super_admin')) {
-            // Jika ya, filter data hanya tampilkan yang coach_id nya sama dengan ID user yang sedang login
-            return $query->where('coach_id', auth()->id());
+        $user = auth()->user();
+
+        // 1. Logika untuk Siswa: Hanya lihat club di mana dia terdaftar
+        if ($user->hasRole('siswa')) {
+            $query->whereHas('students', function (Builder $q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
         }
 
-        // Jika super_admin, kembalikan semua data
+        // 2. Logika untuk Coach: Hanya lihat club yang dia ajar (Opsional, hapus kalau Coach boleh lihat semua)
+        elseif ($user->hasRole('coach')) {
+            $query->where('coach_id', $user->id);
+        }
+
+        // 3. Super Admin otomatis melihat semua data tanpa filter
+
         return $query;
     }
 }
