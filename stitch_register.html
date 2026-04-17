@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#4b1c00",
+                    "secondary-fixed": "#ffdf9f",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2f3036",
+                    "surface-container-high": "#e9e7ef",
+                    "on-surface": "#1a1b21",
+                    "inverse-primary": "#b6c4ff",
+                    "secondary-fixed-dim": "#f9bd22",
+                    "surface-container-highest": "#e3e1e9",
+                    "secondary": "#795900",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#341100",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "outline": "#757682",
+                    "on-primary-fixed-variant": "#264191",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "tertiary-fixed": "#ffdbcb",
+                    "on-primary-container": "#90a8ff",
+                    "background": "#faf8ff",
+                    "primary-fixed": "#dce1ff",
+                    "primary": "#00236f",
+                    "surface-tint": "#4059aa",
+                    "tertiary-container": "#6e2c00",
+                    "on-primary-fixed": "#00164e",
+                    "surface-dim": "#dad9e1",
+                    "primary-container": "#1e3a8a",
+                    "surface": "#faf8ff",
+                    "secondary-container": "#ffc329",
+                    "on-secondary-fixed": "#261a00",
+                    "inverse-on-surface": "#f1f0f7",
+                    "outline-variant": "#c5c5d3",
+                    "on-tertiary-fixed-variant": "#773205",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#faf8ff",
+                    "surface-container-low": "#f4f3fa",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#444651",
+                    "on-background": "#1a1b21",
+                    "surface-variant": "#e3e1e9",
+                    "on-tertiary-container": "#f39461",
+                    "on-secondary-container": "#6f5100",
+                    "surface-container": "#eeedf4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -12px rgba(30, 58, 138, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body overflow-hidden">
+<!-- Background Context (Club Detail Page - Blurred) -->
+<div class="fixed inset-0 z-0 overflow-y-auto filter blur-sm grayscale-[0.2]">
+<!-- TopNavBar Component -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-blue-900 dark:text-blue-400 font-lexend font-bold text-lg docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none flex justify-between items-center px-8 py-4 w-full max-w-full mx-auto">
+<div class="text-blue-900 dark:text-blue-300 font-bold tracking-tight">STUDY CLUB</div>
+<div class="flex items-center gap-6">
+<span class="text-slate-600 font-medium">Beranda</span>
+<span class="text-amber-500 font-bold">Klub Saya</span>
+<div class="flex gap-4">
+<button class="px-4 py-2 rounded-md bg-slate-100 text-blue-900">Login</button>
+<button class="px-4 py-2 rounded-md bg-blue-900 text-white">Daftar</button>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-8 pt-12 pb-24 grid grid-cols-12 gap-8">
+<!-- Hero Header Section -->
+<header class="col-span-12 relative h-[400px] rounded-xl overflow-hidden bg-primary-container">
+<img class="w-full h-full object-cover opacity-60" data-alt="minimalist architecture of a modern university library with grand concrete pillars and soft sunlight streaming through high windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI_wpoA7Se8TP2DItx6o3bqPY3k-atKDfPI0pfDAmgyF2_Cqh9KkYOz6X5In5KbceAEEARvqHAKp-lC1RFAT72DB86yJt2QsIjaTV4aq8Q80wWOMOJ3n-B1NdNvZ-CPOEq8Jpu3--y7c-_oa_SkazIulYrMxzSlIic114GELntt-5smZYxqrAyACwR8B7TlolTCkM-4V1E4CHAMac5gwXp5lQxZgcgy1zB58XonzxnPnQUnz2b1MLWbcS_3K_3WU2JBKWztP0Ytkg"/>
+<div class="absolute inset-0 flex flex-col justify-end p-12 bg-gradient-to-t from-primary to-transparent">
+<h1 class="font-headline font-extrabold text-5xl text-white mb-2">Klub Astronomi Jakarta</h1>
+<p class="text-primary-fixed text-xl max-w-2xl">Menjelajahi cakrawala kosmos melalui observasi mingguan dan diskusi sains yang mendalam.</p>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="col-span-8 flex flex-col gap-8">
+<section class="p-8 bg-surface-container-low rounded-xl">
+<h2 class="font-headline font-bold text-2xl mb-4 text-primary">Tentang Klub</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                        Klub Astronomi Jakarta adalah wadah bagi para antusias luar angkasa untuk berbagi pengetahuan dan pengalaman. Kami berfokus pada astrofotografi, pengamatan planet, dan pendidikan sains untuk publik.
+                    </p>
+<div class="grid grid-cols-3 gap-4">
+<div class="p-4 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-secondary block mb-2">event</span>
+<span class="block font-bold text-primary">Setiap Sabtu</span>
+<span class="text-xs text-on-surface-variant">Pertemuan Rutin</span>
+</div>
+<div class="p-4 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-secondary block mb-2">group</span>
+<span class="block font-bold text-primary">120 Anggota</span>
+<span class="text-xs text-on-surface-variant">Komunitas Aktif</span>
+</div>
+<div class="p-4 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-secondary block mb-2">location_on</span>
+<span class="block font-bold text-primary">Planetarium</span>
+<span class="text-xs text-on-surface-variant">Lokasi Utama</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Side Card -->
+<div class="col-span-4">
+<div class="p-8 bg-surface-container-highest rounded-xl sticky top-32">
+<h3 class="font-headline font-bold text-xl mb-6 text-primary">Persyaratan Bergabung</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">check_circle</span>
+<span class="text-sm text-on-surface-variant">Mahasiswa atau Umum aktif di Jakarta.</span>
+</li>
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">check_circle</span>
+<span class="text-sm text-on-surface-variant">Memiliki ketertarikan tinggi pada astronomi.</span>
+</li>
+</ul>
+<button class="w-full py-4 bg-secondary-container text-on-secondary-container font-headline font-bold rounded-lg shadow-md">Gabung Sekarang</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Overlay with Enhanced Glassmorphism -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-primary/20 backdrop-blur-xl">
+<!-- Registration Modal with Figma Polish -->
+<div class="bg-white/95 w-full max-w-lg rounded-3xl editorial-shadow overflow-hidden flex flex-col border border-white/20">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4">
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-headline font-extrabold text-3xl text-primary tracking-tight">Pendaftaran Klub</h2>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">close</span>
+</button>
+</div>
+<p class="text-on-surface-variant text-[15px] leading-relaxed opacity-80">Ceritakan sedikit tentang dirimu dan mengapa kamu tertarik bergabung dengan Klub Astronomi Jakarta.</p>
+</div>
+<!-- Modal Content (Form) -->
+<form class="p-8 pt-4 flex flex-col gap-6">
+<div class="flex flex-col gap-2.5">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em] ml-0.5 opacity-60">Motivasi Bergabung</label>
+<textarea class="w-full p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/50 focus:border-primary focus:ring-[4px] focus:ring-primary/10 transition-all duration-200 resize-none font-body text-on-surface placeholder:text-outline/40 shadow-sm" placeholder="Tuliskan alasanmu di sini..." rows="5"></textarea>
+<div class="flex justify-between px-1">
+<span class="text-[10px] text-outline font-medium italic opacity-70">Minimal 50 kata untuk pertimbangan kurator.</span>
+<span class="text-[10px] text-outline font-semibold tracking-wider">0 / 500</span>
+</div>
+</div>
+<div class="bg-primary/5 p-5 rounded-2xl flex gap-4 items-center border border-primary/10">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<p class="text-xs text-primary leading-relaxed font-medium">
+                    Tim kurator kami akan meninjau aplikasimu dalam 2x24 jam. Kamu akan menerima notifikasi melalui email resmi kami.
+                </p>
+</div>
+<!-- Action Button with Tactile Feedback -->
+<div class="pt-2 flex flex-col gap-4">
+<button class="w-full group relative flex items-center justify-center gap-3 py-4.5 bg-[#ffc329] hover:bg-[#f9bd22] active:bg-[#e6ae1f] text-primary font-headline font-extrabold rounded-2xl transition-all duration-300 transform active:scale-[0.98] shadow-lg shadow-[#ffc329]/30 hover:shadow-xl hover:shadow-[#ffc329]/40 py-4" type="submit">
+<span class="tracking-tight">Kirim Pendaftaran</span>
+<span class="material-symbols-outlined text-xl group-hover:translate-x-1.5 transition-transform duration-300">arrow_forward</span>
+</button>
+<button class="w-full py-2 text-outline hover:text-primary font-bold text-[14px] transition-all hover:scale-[1.02] active:scale-[0.98]" type="button">
+                    Batal
+                </button>
+</div>
+</form>
+</div>
+</div>
+<!-- BottomNavBar (Suppressed for focused modal task) -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center px-4 h-16 md:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-lg z-10 opacity-20 pointer-events-none">
+<div class="text-slate-400 pt-3 flex flex-col items-center">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-semibold">Beranda</span>
+</div>
+<div class="text-blue-900 border-t-4 border-amber-500 pt-2 flex flex-col items-center">
+<span class="material-symbols-outlined">school</span>
+<span class="text-xs font-semibold">Akademik</span>
+</div>
+<div class="text-slate-400 pt-3 flex flex-col items-center">
+<span class="material-symbols-outlined">news</span>
+<span class="text-xs font-semibold">Berita</span>
+</div>
+<div class="text-slate-400 pt-3 flex flex-col items-center">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="text-xs font-semibold">Galeri</span>
+</div>
+</nav>
+</body></html>

@@ -2,32 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Menampilkan halaman form register front-end
+    // Menampilkan halaman form register
     public function showRegister()
     {
-        return view('auth.register');
+        return view('pages.register');
     }
 
-    // Memproses data pendaftaran akun baru
+    // Memproses data pendaftaran
     public function register(Request $request)
     {
+        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'nullable|string|max:20',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8|confirmed', // confirmed berarti butuh password_confirmation
         ], [
             'email.unique' => 'Email ini sudah terdaftar. Silakan gunakan email lain atau login.',
-            'password.confirmed' => 'Konfirmasi password tidak cocok.'
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'password.min' => 'Password minimal 8 karakter.'
         ]);
 
+        // Simpan ke database
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -35,13 +38,22 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Otomatis pasangkan role 'siswa' (Spatie)
+        // Otomatis pasangkan role 'siswa'
         $user->assignRole('siswa');
 
-        // Login-kan otomatis
+        // Langsung login-kan siswa tersebut
         Auth::login($user);
 
-        // Langsung lempar ke Dashboard Filament!
-        return redirect('/admin')->with('success', 'Akun berhasil dibuat! Selamat datang di Portal Study Club.');
+        // Arahkan kembali ke halaman utama dengan pesan sukses
+        return redirect()->route('home')->with('success', 'Akun berhasil dibuat! Silakan pilih Study Club yang kamu minati.');
     }
+
+    // Fungsi tambahan untuk Logout dari front-end
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
+    }   
 }

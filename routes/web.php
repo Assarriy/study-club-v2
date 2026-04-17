@@ -1,39 +1,41 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FrontEndController;
+use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-// ==========================================
-// ROUTE PUBLIK (Landing Page & Detail)
-// ==========================================
 Route::get('/', [FrontEndController::class, 'index'])->name('home');
+
+Route::prefix('kimia')->name('kimia.')->group(function () {
+    Route::view('/landing', 'pages.landing')->name('landing');
+    Route::view('/contact', 'pages.contact')->name('contact');
+    Route::view('/info-center', 'pages.info-center')->name('info-center');
+    Route::view('/gallery', 'pages.gallery')->name('gallery');
+    Route::view('/login', 'pages.login')->name('login');
+    Route::view('/recruitment', 'pages.recruitment')->name('recruitment');
+    Route::view('/profile', 'pages.profile')->name('profile');
+    Route::view('/hub', 'pages.hub')->name('hub');
+    Route::view('/directory', 'pages.directory')->name('directory');
+    Route::view('/links', 'pages.links')->name('links');
+});
+
+// Route::get('/old-home', [FrontEndController::class, 'index'])->name('old.home');
+
 Route::get('/club/{slug}', [FrontEndController::class, 'show'])->name('club.show');
 
-// ==========================================
-// ROUTE GUEST (Untuk yang BELUM login)
-// ==========================================
+Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])
+    ->name('club.register')
+    ->middleware('auth');
+
+// Route khusus untuk tamu (belum login)
 Route::middleware('guest')->group(function () {
-    // Form Pendaftaran Akun Siswa Baru
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.process');
-
-    // Redirect /login otomatis ke portal Filament
-    Route::get('/login', function () {
-        return redirect('/admin/login');
-    })->name('login');
 });
 
-// ==========================================
-// ROUTE AUTH (Untuk Mendaftar Club)
-// ==========================================
-Route::middleware('auth')->group(function () {
-    // Proses Siswa Mendaftar ke Study Club dari Front-End
-    Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])->name('club.register');
-});
+// Route khusus Logout
+Route::post('/logout-frontend', [AuthController::class, 'logout'])->name('logout.frontend');

@@ -11,19 +11,26 @@ use Illuminate\Support\Facades\Log;
 
 class FrontEndController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
 
-        $clubs = StudyClub::with(['category', 'coach'])
-            ->where('is_active', true)
-            ->latest()
-            ->get();
+        $search = $request->query('search');
 
-        return view('welcome', compact('categories', 'clubs'));
+        $query = StudyClub::with(['category', 'coach'])
+            ->where('is_active', true);
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('description', 'like', '%' . $search . '%');
+        }
+
+        $clubs = $query->latest()->get();
+
+        return view('pages.landing', compact('categories', 'clubs'));
     }
 
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         $club = StudyClub::with([
             'category',
@@ -48,14 +55,31 @@ class FrontEndController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        return view('club.show', compact('club'));
+        $isRegistered = false;
+        if (Auth::check()) {
+            $isRegistered = Registration::where('user_id', Auth::id())
+                                ->where('study_club_id', $club->id)
+                                ->exists();
+        }
+
+        $tab = $request->query('tab', 'home');
+        
+        if ($tab === 'news') {
+            return view('pages.detail-news', compact('club', 'isRegistered'));
+        } elseif ($tab === 'gallery') {
+            return view('pages.detail-gallery', compact('club', 'isRegistered'));
+        } elseif ($tab === 'academic') {
+            return view('pages.detail-academic', compact('club', 'isRegistered'));
+        }
+
+        return view('pages.detail', compact('club', 'isRegistered'));
     }
 
     public function register(Request $request, $slug)
     {
         // Ensure user is authenticated
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk mendaftar.');
+            return redirect('/admin/login')->with('error', 'Silakan login terlebih dahulu untuk mendaftar.');
         }
 
         $request->validate([

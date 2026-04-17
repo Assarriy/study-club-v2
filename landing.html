@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SC Kimia - Menjelajahi Keajaiban Kimia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;family=Montserrat:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FBBF24", // Amber-400 equivalent for that bright yellow
+                        secondary: "#1A365D", // Deep Navy Blue from prompt
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#0f172a",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1e293b",
+                        "text-light": "#1f2937",
+                        "text-dark": "#f3f4f6",
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                    backgroundImage: {
+                        'molecule-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')", 
+                    }
+                },
+            },
+        };
+    </script>
+<style>
+        .hero-pattern {
+            background-image: radial-gradient(#FBBF24 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }.hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300">
+<nav class="fixed top-0 w-full z-50 bg-white/90 dark:bg-slate-900/90 glass-effect border-b border-gray-200 dark:border-gray-800 shadow-sm transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-20">
+<div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg">
+<span class="material-icons-round text-secondary text-2xl">science</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display font-bold text-2xl tracking-tight text-secondary dark:text-primary leading-none">SC KIMIA</span>
+<span class="text-[0.65rem] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold">MAN 1 Lombok Timur</span>
+</div>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Beranda</a>
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Tentang Kami</a>
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Kegiatan</a>
+<a class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Galeri</a>
+<a class="bg-primary hover:bg-yellow-500 text-secondary font-bold py-2.5 px-6 rounded-full transition-transform transform hover:scale-105 shadow-md flex items-center gap-2" href="#">
+<span class="material-icons-round text-sm">login</span>
+                        Login / Daftar
+                    </a>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-gray-700 dark:text-gray-300 hover:text-primary focus:outline-none">
+<span class="material-icons-round text-3xl">menu</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<section class="relative pt-20 overflow-hidden bg-secondary dark:bg-slate-950">
+<div class="absolute inset-0 hero-pattern z-0"></div>
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+<div class="absolute top-1/2 -left-24 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-24 md:pt-32 md:pb-40">
+<div class="lg:w-2/3">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 border border-blue-700 text-blue-100 text-sm font-medium mb-6 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Komunitas Sains Terdepan
+                </div>
+<h1 class="font-display font-extrabold text-5xl md:text-7xl text-white leading-tight mb-6">
+                    Menjelajahi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-200">Keajaiban Kimia</span>
+</h1>
+<p class="text-xl text-blue-100 mb-10 max-w-2xl font-light leading-relaxed">
+                    Bergabunglah dengan komunitas ilmiah kami untuk bereksperimen, belajar, dan menemukan rahasia alam semesta melalui lensa kimia. Tanpa batas, penuh inovasi.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-primary hover:bg-yellow-500 text-secondary font-bold py-4 px-8 rounded-lg shadow-lg shadow-yellow-500/20 transition-all hover:-translate-y-1 flex items-center justify-center gap-2 group">
+                        Mulai Eksplorasi
+                        <span class="material-icons-round group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-transparent border-2 border-white/20 hover:border-primary hover:text-primary text-white font-semibold py-4 px-8 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-icons-round">play_circle_outline</span>
+                        Lihat Video Profil
+                    </button>
+</div>
+</div>
+<div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-full pointer-events-none opacity-40 mix-blend-screen">
+<svg class="w-full h-full animate-[spin_60s_linear_infinite]" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.5,70.6,32.2C59,42.9,47.1,51.4,34.8,58.3C22.5,65.2,9.8,70.5,-2.2,74.3C-14.2,78.1,-25.5,80.4,-36.3,76.5C-47.1,72.6,-57.4,62.5,-66.2,50.7C-75,38.9,-82.3,25.4,-84.1,11.2C-85.9,-3,-82.2,-17.9,-73.9,-30.2C-65.6,-42.5,-52.7,-52.2,-39.6,-59.8C-26.5,-67.4,-13.2,-72.9,1.1,-74.8C15.4,-76.7,30.5,-75.1,44.7,-76.4Z" fill="#FBBF24" transform="translate(100 100)"></path>
+</svg>
+</div>
+</div>
+</section>
+<div class="relative -mt-16 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white dark:bg-card-dark rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 border border-gray-100 dark:border-gray-700">
+<div class="flex items-center gap-4 border-b md:border-b-0 md:border-r border-gray-100 dark:border-gray-700 pb-6 md:pb-0">
+<div class="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-xl text-secondary dark:text-blue-300">
+<span class="material-icons-round text-3xl">biotech</span>
+</div>
+<div>
+<h3 class="font-bold text-3xl text-secondary dark:text-white">50+</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Eksperimen Rutin</p>
+</div>
+</div>
+<div class="flex items-center gap-4 border-b md:border-b-0 md:border-r border-gray-100 dark:border-gray-700 pb-6 md:pb-0">
+<div class="p-3 bg-yellow-50 dark:bg-yellow-900/30 rounded-xl text-secondary dark:text-yellow-300">
+<span class="material-icons-round text-3xl">school</span>
+</div>
+<div>
+<h3 class="font-bold text-3xl text-secondary dark:text-white">120+</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Anggota Aktif</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="p-3 bg-green-50 dark:bg-green-900/30 rounded-xl text-secondary dark:text-green-300">
+<span class="material-icons-round text-3xl">emoji_events</span>
+</div>
+<div>
+<h3 class="font-bold text-3xl text-secondary dark:text-white">15</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Penghargaan Nasional</p>
+</div>
+</div>
+</div>
+</div>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-2">Update Terkini</h2>
+<h3 class="font-display font-bold text-3xl md:text-4xl text-secondary dark:text-white">Berita Terbaru</h3>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-colors dark:text-gray-300">
+<span class="material-icons-round">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-secondary transition-colors dark:text-gray-300">
+<span class="material-icons-round">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-8 hide-scroll snap-x snap-mandatory">
+<div class="min-w-[300px] md:min-w-[380px] snap-start">
+<div class="bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-800 h-full flex flex-col">
+<div class="h-48 bg-gray-200 dark:bg-gray-700 relative group overflow-hidden">
+<img alt="Laboratory flask close up" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZWODWJg3D8A3lWBLSYUeYHaKJhx_9G23K5c134Iw_N7jAi2LiYU8ta0SfbzWMOXLd2cbSurJs9P05dCxkYwimRC-jKQ9KJ31z17QhbI8-w0pUzFrl7YncmdX9OcohW9PFtcN7dOhiVfbdBjt_nZSM36NDrkqYA12XHC9KjmfvtkaXiITxDNOdplvxe5f8FYjbnuld9Qa5ZFHT0GQ4Ytfx6yWbOdKq07qSlHrW2QTbpd2RrOuMYreGxseLpWFjLvekCkQTmxDwHJ4"/>
+<div class="absolute top-4 left-4 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">Kompetisi</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                12 Oktober 2023
+                            </div>
+<h4 class="font-bold text-xl mb-3 text-secondary dark:text-white line-clamp-2">Juara 1 Olimpiade Kimia Tingkat Provinsi</h4>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
+                                Tim SC Kimia berhasil membawa pulang medali emas dalam ajang bergengsi tahunan yang diadakan di Mataram.
+                            </p>
+<a class="inline-flex items-center text-primary font-semibold text-sm hover:underline mt-auto" href="#">
+                                Baca Selengkapnya <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="min-w-[300px] md:min-w-[380px] snap-start">
+<div class="bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-800 h-full flex flex-col">
+<div class="h-48 bg-gray-200 dark:bg-gray-700 relative group overflow-hidden">
+<img alt="Microscope slide" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTa9kDWuAtZa6qASJ0ddZAX4Sae-WF0tFY71YO4tj249q9D79arY9zPOjnmA3eMt6eG8vYOj5RBSIpqPsUYI4-oDTK6UqRLAy4VXFgxLwv5h8_huld4k4L8saAvXlriMTIc7CtzFvBWf5iDyHQYdX5FnjDoUAK0-MR_Fj72ODF2h_Z6HHcaJHW6OLSdjL5_tV1s5bV31p3l9AWuFTgA_dphKdFpItnaVZKE5qFK7mOvfCccCZ09iV113C7WLbfwV8U07ZVVJAaPcE"/>
+<div class="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">Workshop</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                25 September 2023
+                            </div>
+<h4 class="font-bold text-xl mb-3 text-secondary dark:text-white line-clamp-2">Workshop Pembuatan Sabun Organik</h4>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
+                                Belajar tentang reaksi saponifikasi secara langsung dengan bahan-bahan alami yang ramah lingkungan.
+                            </p>
+<a class="inline-flex items-center text-primary font-semibold text-sm hover:underline mt-auto" href="#">
+                                Baca Selengkapnya <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="min-w-[300px] md:min-w-[380px] snap-start">
+<div class="bg-white dark:bg-card-dark rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-800 h-full flex flex-col">
+<div class="h-48 bg-gray-200 dark:bg-gray-700 relative group overflow-hidden">
+<img alt="Periodic table close up" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVqVXHj-OkgvQizxX0Q9839NHGTDHR7aOHCCFCm4KgxgSmVkUJ47XASzcnqGW1NbCzqOafhaoZpII8KIb3ZWAnFcGUFHzPNSJ3CR6ULGwp0WFYWWXB_kafwsi-XKGNJgbrXLNbwy2yx-7mSOkr8MnbJHdEdHFzHSjnBEEjUWSVRBijs0hvttGSymMgWhurWN-d1EmfzaP4GYP5pOeFbYO6kPU2wmp4KDgXBx8YuDerJYwdmgLunV1hVrRYnT3193Rs-Aon6OcamBE"/>
+<div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Edukasi</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 gap-2">
+<span class="material-icons-round text-sm">calendar_today</span>
+                                10 September 2023
+                            </div>
+<h4 class="font-bold text-xl mb-3 text-secondary dark:text-white line-clamp-2">Mengenal Unsur Baru Tabel Periodik</h4>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3 flex-grow">
+                                Diskusi panel mengenai penemuan unsur-unsur sintetis terbaru dan dampaknya bagi dunia sains modern.
+                            </p>
+<a class="inline-flex items-center text-primary font-semibold text-sm hover:underline mt-auto" href="#">
+                                Baca Selengkapnya <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-gray-50 dark:bg-slate-900">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-2">Dokumentasi</h2>
+<h3 class="font-display font-bold text-3xl md:text-4xl text-secondary dark:text-white mb-4">Galeri Aktivitas</h3>
+<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Momen-momen terbaik dari eksperimen laboratorium dan kegiatan klub kami.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+<div class="col-span-2 row-span-2 relative group overflow-hidden rounded-2xl cursor-pointer">
+<img alt="Colorful chemistry beakers" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASWhu6oPqHF1HBRRd7C_CSUMPE2AYhWFafQPicpUyU2HhnTwqQsQqb5BzBgWJ4CTM_vyp_2OZxSUDiU-6KPxHcm6VudjT364zUdMMjFlt36EW6h8Ah1fZNPPaaD6e1ySCUWp3yn3ACvoJlmelDDsAlGWB2El6Bfje4G1XlJMlK7aUJaor2Htnd75V5obQJtkBzqpWeXEYkaVudFlIOp9s-RxzlooizW7LknA2vlYjQVtHFSkcKcNwTWFfXRJU_xM4YLwVHo9f33IU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-white font-bold text-lg">Eksperimen Warna</span>
+</div>
+</div>
+<div class="col-span-1 row-span-2 relative group overflow-hidden rounded-2xl cursor-pointer hidden md:block">
+<img alt="Crystal structure close up" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1zcx7jHK7pEPm7jgCmJd_ixBlxiCH3MV7fRpdhleLyXdcBunr474LXioopHC0h2UtfLHVioXLhsLmTxwhvT6e7W21xUMAcQp5mijwAJZZ2j8kHWjusoTg9lY_7aSoTats68VAiSoGykCidfWEuIA3iHGnWymofuIurRp4-rBxsjE0-bAhO6XKUG0NgIzsfK97eAPYnikF6Ur6_ck94QJ8Jbz82c22X2n5X06CwhpkpNdtDNR6BvVIIrbghNvs1G8Wm9AGkvGCDeI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-white font-bold text-lg">Struktur Kristal</span>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative group overflow-hidden rounded-2xl cursor-pointer">
+<img alt="Scientific glassware abstract" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHn4TfNC9u2bj797n9JTXZfCYXUlPwQNajGym1Vj5Qp3_JMVB4XgyxtX0TFrrPLS7FtXW0mgBjjyhsP9_drEUljlFIEwSAZpypyYvfl_jW36AynGak4oBEuN_x4f5-savHtQ-56K-TPPCahl01K0s_amsVwl-Y5tARjmA9zowbw4D0viLzkwB9lM0p_PiHY-UBSuEbYDd-r36pjbg34pVYCkjmJY-HttE1j8QPaojU4ip3H_Tq5N7rWFt0NBaQGdCqf-EBYPYByDQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+<span class="text-white font-bold text-sm">Glassware</span>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative group overflow-hidden rounded-2xl cursor-pointer">
+<img alt="Chemical reaction bubbles" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuJJT64LgWxMHP5xn_4sqSo9xNiahJKT-I7KfHg8j9XhYUKT4ijUr5niV-n4j7_zd94lh0265EIJiN3pTZhsmh_myOV5Thgwfjc3Jfcnr_EBX2nkApVPf6FJyHV_f-vTSSMys3q_qEajLPzHC3zdQMXJq1y1g7lzfytqgjSfTs7VgIcHI09c4JDHltIVPOb61jnf7l_Y5qQeT6UGIrwplOEw-JhKUy59pJ2AMWBvSDPnq3RxqrulnFD8MsIaVh-ovj_yQpk4fjHmM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+<span class="text-white font-bold text-sm">Reaksi</span>
+</div>
+</div>
+</div>
+<div class="text-center mt-12">
+<button class="border-2 border-secondary dark:border-white text-secondary dark:text-white hover:bg-secondary hover:text-white dark:hover:bg-white dark:hover:text-secondary font-bold py-3 px-8 rounded-full transition-colors">
+                    Lihat Semua Galeri
+                </button>
+</div>
+</div>
+</section>
+<section class="py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary dark:bg-black"></div>
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')] opacity-10"></div>
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full filter blur-[100px] opacity-20"></div>
+<div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+<span class="material-icons-round text-primary text-6xl mb-6 animate-bounce">science</span>
+<h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-6">Siap Menjadi Ilmuwan Muda?</h2>
+<p class="text-xl text-blue-100 mb-10 leading-relaxed">
+                Tingkatkan pengetahuan kimiamu, ikuti kompetisi, dan bangun jaringan dengan sesama pecinta sains di SC Kimia.
+            </p>
+<button class="bg-[#F6AD55] hover:bg-orange-400 text-secondary font-extrabold text-lg py-5 px-10 rounded-xl shadow-[0_0_30px_rgba(246,173,85,0.4)] transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+                Gabung Menjadi Anggota Sekarang
+            </button>
+<p class="mt-6 text-sm text-gray-400">Pendaftaran dibuka untuk seluruh siswa MAN 1 Lombok Timur</p>
+</div>
+</section>
+<footer class="bg-white dark:bg-card-dark border-t border-gray-200 dark:border-gray-800 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-icons-round text-secondary text-lg">science</span>
+</div>
+<span class="font-display font-bold text-xl text-secondary dark:text-white">SC KIMIA</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6">
+                        Wadah pengembangan minat dan bakat siswa di bidang ilmu kimia melalui eksperimen, diskusi, dan kompetisi.
+                    </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><i class="material-icons-round">facebook</i></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><i class="material-icons-round">ondemand_video</i></a> 
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><i class="material-icons-round">camera_alt</i></a> 
+</div>
+</div>
+<div>
+<h4 class="font-bold text-secondary dark:text-white mb-6">Navigasi</h4>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Beranda</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Profil Klub</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Program Kerja</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Prestasi</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-secondary dark:text-white mb-6">Informasi</h4>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Jadwal Kegiatan</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Syarat Anggota</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Kontak</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-secondary dark:text-white mb-6">Kontak Kami</h4>
+<ul class="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+<li class="flex gap-3">
+<span class="material-icons-round text-primary text-sm">location_on</span>
+<span>Jl. Hasanuddin No. 1, Selong, Lombok Timur</span>
+</li>
+<li class="flex gap-3">
+<span class="material-icons-round text-primary text-sm">email</span>
+<span>info@sckimia-man1lotim.sch.id</span>
+</li>
+<li class="flex gap-3">
+<span class="material-icons-round text-primary text-sm">call</span>
+<span>(0376) 21xxx</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+<p>© 2023 SC Kimia MAN 1 Lombok Timur. All rights reserved.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple script to toggle dark mode for demonstration if needed, 
+        // though usually handled by system preference or a toggle button not explicitly requested but good for testing.
+        // Uncomment to test dark mode manually
+        // document.documentElement.classList.add('dark');
+    </script>
+
+</body></html>
