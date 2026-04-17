@@ -26,7 +26,8 @@
     </style>
 </head>
 
-<body class="bg-[#F8FAFC] text-slate-800 antialiased selection:bg-brand-yellow selection:text-brand-blue overflow-x-hidden">
+<body
+    class="bg-[#F8FAFC] text-slate-800 antialiased selection:bg-brand-yellow selection:text-brand-blue ">
 
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass-card shadow-sm shadow-slate-200/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -112,23 +113,20 @@
                 skill spesifik, dan bangun portofolio sejak dini.
             </p>
 
-            <div class="max-w-3xl mx-auto mb-16 relative" id="searchContainer">
-                <div class="bg-white p-2 rounded-full shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center transform transition hover:scale-[1.02]">
-                    <div class="pl-6 text-slate-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                    <input type="text" id="searchInput" placeholder="Cari club matematika, bahasa, atau IT..."
-                        class="w-full py-4 px-4 outline-none text-slate-700 bg-transparent placeholder-slate-400 font-medium">
-                    <button id="searchBtn"
-                        class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-800 transition shadow-md">
-                        Cari Club
-                    </button>
+            <div
+                class="max-w-3xl mx-auto bg-white p-2 rounded-full shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center mb-16 transform transition hover:scale-[1.02]">
+                <div class="pl-6 text-slate-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
                 </div>
-                <!-- Dropdown Hasil Search -->
-                <div id="searchResults" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-slate-100 max-h-96 overflow-y-auto hidden z-50"></div>
+                <input type="text" placeholder="Cari club matematika, bahasa, atau IT..."
+                    class="w-full py-4 px-4 outline-none text-slate-700 bg-transparent placeholder-slate-400 font-medium">
+                <button
+                    class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-800 transition shadow-md">
+                    Cari Club
+                </button>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto border-t border-slate-200 pt-10">
@@ -154,9 +152,10 @@
 
     <div id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 mt-10">
         <div class="flex flex-wrap items-center justify-center gap-3">
-            <button class="categoryFilter px-6 py-2.5 rounded-full bg-brand-blue text-white font-bold shadow-md active" data-category="all">Semua Club</button>
+            <button class="px-6 py-2.5 rounded-full bg-brand-blue text-white font-bold shadow-md">Semua Club</button>
             @foreach($categories as $cat)
-                <button class="categoryFilter px-6 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 font-semibold hover:border-brand-blue hover:text-brand-blue transition shadow-sm" data-category="{{ $cat->id }}">
+                <button
+                    class="px-6 py-2.5 rounded-full bg-white border border-slate-200 text-slate-600 font-semibold hover:border-brand-blue hover:text-brand-blue transition shadow-sm">
                     {{ $cat->name }}
                 </button>
             @endforeach
@@ -164,10 +163,11 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div id="clubsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($clubs as $club)
                 <a href="{{ route('club.show', $club->slug) }}"
                     class="bg-white rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 overflow-hidden group hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative block">
+
                     <div
                         class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-brand-yellow/20 to-transparent rounded-bl-full z-0">
                     </div>
@@ -198,7 +198,8 @@
 
                     <div class="p-6 flex flex-col flex-grow z-10">
                         <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-blue transition-colors">
-                            {{ $club->name }}</h3>
+                            {{ $club->name }}
+                        </h3>
                         <p class="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
                             {!! strip_tags($club->description) ?? 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.' !!}
                         </p>
@@ -262,10 +263,17 @@
                 Jangan lewatkan kesempatan untuk belajar hal baru, bertemu teman sehobi, dan dibimbing oleh
                 mentor-mentor hebat.
             </p>
-            <a href="/admin"
-                class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
-                Daftar Sekarang
-            </a>
+            @auth
+                <a href="/admin"
+                    class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
+                    Ke Dashboard Saya
+                </a>
+            @else
+                <a href="{{ route('register') }}"
+                    class="inline-block bg-brand-yellow text-brand-blue font-black px-10 py-4 rounded-full text-lg hover:bg-white transition-colors shadow-xl shadow-yellow-500/20 relative z-10">
+                    Daftar Sekarang
+                </a>
+            @endauth
         </div>
     </div>
 
@@ -313,176 +321,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // ===== SEARCH FUNCTIONALITY =====
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const searchResults = document.getElementById('searchResults');
-        const searchContainer = document.getElementById('searchContainer');
-        let searchTimeout;
-
-        const performSearch = async (query) => {
-            if (!query.trim()) {
-                searchResults.classList.add('hidden');
-                return;
-            }
-
-            try {
-                const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
-                const clubs = await response.json();
-
-                if (clubs.length === 0) {
-                    searchResults.innerHTML = `
-                        <div class="p-6 text-center text-slate-500">
-                            <p class="font-semibold">Tidak ada club yang ditemukan</p>
-                        </div>
-                    `;
-                } else {
-                    searchResults.innerHTML = clubs.map(club => `
-                        <a href="/club/${club.slug}" class="block p-4 border-b border-slate-100 hover:bg-slate-50 transition last:border-b-0">
-                            <div class="flex items-start justify-between">
-                                <div class="flex-1">
-                                    <h3 class="font-bold text-slate-900 text-sm mb-1">${club.name}</h3>
-                                    <p class="text-xs text-slate-500 mb-2 line-clamp-1">${club.description ? club.description.substring(0, 80) : 'Eksplorasi ilmu dan kembangkan potensimu'}</p>
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 text-[10px] font-bold text-white rounded-full" style="background-color: ${club.category?.color_theme || '#1E3A8A'}">
-                                        ${club.category?.name || 'Kategori'}
-                                    </span>
-                                </div>
-                                <div class="flex-shrink-0 ml-3">
-                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-blue-400 text-white flex items-center justify-center font-bold text-xs border-2 border-white shadow-md">
-                                        ${club.coach?.name?.charAt(0) || 'C'}
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    `).join('');
-                }
-                searchResults.classList.remove('hidden');
-            } catch (error) {
-                console.error('Search error:', error);
-                searchResults.innerHTML = `<div class="p-6 text-center text-red-500">Error saat mencari</div>`;
-            }
-        };
-
-        // Real-time search saat mengetik
-        searchInput.addEventListener('input', (e) => {
-            clearTimeout(searchTimeout);
-            const query = e.target.value;
-            searchTimeout = setTimeout(() => performSearch(query), 300);
-        });
-
-        // Search saat klik tombol
-        searchBtn.addEventListener('click', () => {
-            performSearch(searchInput.value);
-        });
-
-        // Search saat tekan Enter
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                performSearch(searchInput.value);
-            }
-        });
-
-        // Tutup dropdown saat klik di luar
-        document.addEventListener('click', (e) => {
-            if (!searchContainer.contains(e.target)) {
-                searchResults.classList.add('hidden');
-            }
-        });
-
-        // ===== CATEGORY FILTER FUNCTIONALITY =====
-        const categoryFilters = document.querySelectorAll('.categoryFilter');
-        const clubsContainer = document.getElementById('clubsContainer');
-
-        categoryFilters.forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                // Update active button style
-                categoryFilters.forEach(b => {
-                    b.classList.remove('bg-brand-blue', 'text-white', 'shadow-md', 'active');
-                    b.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-600');
-                });
-                
-                e.target.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-600');
-                e.target.classList.add('bg-brand-blue', 'text-white', 'shadow-md', 'active');
-
-                // Fetch filtered clubs
-                const categoryId = e.target.getAttribute('data-category');
-                try {
-                    const url = categoryId === 'all' ? '/filter-category' : `/filter-category/${categoryId}`;
-                    const response = await fetch(url);
-                    const clubs = await response.json();
-
-                    if (clubs.length === 0) {
-                        clubsContainer.innerHTML = `
-                            <div class="col-span-full py-20 text-center">
-                                <div class="inline-flex items-center justify-center w-20 h-20 bg-slate-100 rounded-full mb-6">
-                                    <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-2xl font-bold text-slate-800 mb-2">Belum Ada Club</h3>
-                                <p class="text-slate-500">Silakan pilih kategori lain atau hubungi administrator.</p>
-                            </div>
-                        `;
-                    } else {
-                        clubsContainer.innerHTML = clubs.map(club => `
-                            <a href="/club/${club.slug}"
-                                class="club-card bg-white rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 overflow-hidden group hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative block" data-category="${club.category_id}">
-                                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-brand-yellow/20 to-transparent rounded-bl-full z-0"></div>
-
-                                <div class="h-56 relative overflow-hidden bg-slate-50 m-2 rounded-2xl">
-                                    ${club.banner_image ? `
-                                        <img src="/storage/${club.banner_image}" alt="${club.name}"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                    ` : `
-                                        <div class="absolute inset-0 opacity-10" style="background-color: ${club.category?.color_theme || '#1E3A8A'}; background-image: radial-gradient(circle at 2px 2px, black 1px, transparent 0); background-size: 16px 16px;"></div>
-                                        <div class="w-full h-full flex items-center justify-center">
-                                            <span class="text-7xl font-black opacity-10" style="color: ${club.category?.color_theme || '#1E3A8A'}">${club.name.substring(0, 2)}</span>
-                                        </div>
-                                    `}
-
-                                    <div class="absolute top-4 left-4 px-4 py-1.5 glass-card rounded-full text-xs font-bold shadow-sm flex items-center gap-2" style="color: ${club.category?.color_theme || '#1E3A8A'}">
-                                        <div class="w-2 h-2 rounded-full" style="background-color: ${club.category?.color_theme || '#1E3A8A'}"></div>
-                                        ${club.category?.name || 'Kategori'}
-                                    </div>
-                                </div>
-
-                                <div class="p-6 flex flex-col flex-grow z-10">
-                                    <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-brand-blue transition-colors">${club.name}</h3>
-                                    <p class="text-slate-500 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${club.description ? club.description.substring(0, 150) : 'Eksplorasi ilmu dan kembangkan potensimu bersama kami di club ini.'}</p>
-
-                                    <div class="pt-5 border-t border-slate-100 flex items-center justify-between mt-auto">
-                                        <div class="flex items-center gap-3">
-                                            <div class="relative">
-                                                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-blue-400 text-white flex items-center justify-center font-bold border-2 border-white shadow-md">${club.coach?.name?.charAt(0) || 'C'}</div>
-                                                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
-                                            </div>
-                                            <div>
-                                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mentor</p>
-                                                <p class="font-bold text-slate-800 text-sm">${club.coach?.name || 'Mentor'}</p>
-                                            </div>
-                                        </div>
-
-                                        <button class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-blue group-hover:text-white transition-colors border border-slate-200 group-hover:border-transparent">
-                                            <svg class="w-5 h-5 transform -rotate-45 group-hover:rotate-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </a>
-                        `).join('');
-                    }
-                } catch (error) {
-                    console.error('Filter error:', error);
-                    clubsContainer.innerHTML = `<div class="col-span-full p-6 text-center text-red-500">Error saat filter</div>`;
-                }
-            });
-        });
-    </script>
 
 </body>
 
