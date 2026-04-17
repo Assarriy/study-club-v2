@@ -15,7 +15,7 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 overflow-x-hidden">
 
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +92,7 @@
 
                 <section class="bg-gradient-to-br from-white to-blue-50/50 rounded-3xl p-8 shadow-md border border-blue-100 relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                    
+
                     <h2 class="text-2xl font-bold text-brand-blue mb-2 relative z-10">Tertarik Bergabung?</h2>
                     <p class="text-slate-500 mb-6 relative z-10">Tuliskan motivasimu dan jadilah bagian dari keluarga besar {{ $club->name }}.</p>
 
@@ -101,8 +101,8 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="motivation" class="block text-sm font-bold text-slate-700 mb-2">Motivasi & Alasan Bergabung <span class="text-red-500">*</span></label>
-                                <textarea name="motivation" id="motivation" rows="4" 
-                                    class="w-full rounded-xl border-slate-200 shadow-sm focus:border-brand-blue focus:ring focus:ring-brand-blue/20 p-4 transition text-sm" 
+                                <textarea name="motivation" id="motivation" rows="4"
+                                    class="w-full rounded-xl border-slate-200 shadow-sm focus:border-brand-blue focus:ring focus:ring-brand-blue/20 p-4 transition text-sm"
                                     placeholder="Ceritakan mengapa kamu ingin bergabung dengan club ini dan apa yang ingin kamu capai..." required></textarea>
                                 @error('motivation')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -127,7 +127,7 @@
                             </a>
                         </div>
                     @endauth
-                </section>  
+                </section>
 
                 <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
                     <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2"
