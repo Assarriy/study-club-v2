@@ -27,6 +27,18 @@ class FrontEndController extends Controller
 
         $clubs = $query->latest()->get();
 
+        // Support design variant switching via ?design=1|2|3|noir|mono|slate
+        $design = $request->query('design');
+        if (in_array($design, ['1', '2', '3'])) {
+            return view("pages.landing-v{$design}", compact('categories', 'clubs'));
+        }
+
+        // Linear-inspired design options
+        $linearDesigns = ['noir', 'mono', 'slate'];
+        if (in_array($design, $linearDesigns)) {
+            return view("pages.landing-{$design}", compact('categories', 'clubs'));
+        }
+
         return view('pages.landing', compact('categories', 'clubs'));
     }
 
