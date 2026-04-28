@@ -1,120 +1,160 @@
 @extends('layouts.portal')
-@section('title', 'Jadwal & Akademik ' . $club->name . ' - Study Club Portal')
+@section('title', 'AKADEMIK ' . strtoupper($club->name) . ' — STUDY CLUB PORTAL')
+
+
 
 @section('content')
-<main class="max-w-[1440px] mx-auto px-4 md:px-8 py-12 flex flex-col lg:flex-row gap-12">
-    <!-- Main Content Area (Left 70%) -->
-    <div class="w-full lg:w-[70%] space-y-12">
-        
-        <!-- Hero Banner -->
-        <section class="relative h-[200px] md:h-[480px] w-full rounded-2xl overflow-hidden bg-primary shadow-2xl">
-            @if($club->banner_image)
-                <img class="w-full h-full object-cover mix-blend-overlay opacity-40" alt="{{ $club->name }}" src="{{ Storage::url($club->banner_image) }}"/>
-            @else
-                <div class="w-full h-full bg-primary-container mix-blend-overlay opacity-40"></div>
-            @endif
-            <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-8 md:p-12">
-                <span class="inline-block px-4 py-1.5 bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest font-extrabold rounded-full w-fit mb-6 shadow-lg">KALENDER KEGIATAN &amp; MATERI</span>
-                <h1 class="font-headline text-white text-5xl md:text-6xl font-extrabold leading-tight tracking-tight max-w-2xl">Akademik {{ $club->name }}</h1>
-            </div>
-        </section>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10"
+     style="--accent:#2563EB; --accent-light:#EFF6FF; --accent-medium:#DBEAFE; --accent-text:#1e40af; --accent-dark:#1d4ed8;">
 
-        <!-- Sub-Nav Bar -->
-        <div class="flex items-center gap-10 border-b-2 border-surface-container-high overflow-x-auto hide-scroll pb-2">
-            <a class="relative pb-3 text-outline hover:text-primary nav-tab-underline font-semibold whitespace-nowrap" href="{{ route('club.show', $club->slug) }}">Beranda</a>
-            <a class="relative pb-3 text-outline hover:text-primary nav-tab-underline font-semibold whitespace-nowrap" href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'news']) }}">Berita &amp; Prestasi</a>
-            <a class="relative pb-3 text-outline hover:text-primary nav-tab-underline font-semibold whitespace-nowrap" href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'gallery']) }}">Galeri</a>
-            <a class="relative pb-3 text-primary nav-tab-active font-bold whitespace-nowrap" href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'academic']) }}">Akademik</a>
-        </div>
+    {{-- Back Link --}}
+    <a href="{{ route('home') }}" class="group inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 hover:text-zinc-700 transition-colors mb-5 no-underline">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Kembali ke Beranda
+    </a>
 
-        <!-- Section Tabel Akademik & Jadwal -->
-        <div class="space-y-8 md:editorial-offset">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-8 w-1.5 bg-secondary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-headline">Silabus &amp; Jadwal</h2>
-                <div class="h-[1px] flex-grow bg-outline-variant/30 ml-4"></div>
-            </div>
-
-            <!-- Tabel Jadwal -->
-            <div class="overflow-x-auto border border-outline-variant/30 rounded-2xl bg-white shadow-sm mb-12">
-                @if($club->schedules && $club->schedules->isNotEmpty())
-                <table class="w-full text-left border-collapse min-w-[700px]">
-                    <thead>
-                        <tr class="bg-surface-container-low border-b border-outline-variant/30">
-                            <th class="px-8 py-5 font-headline font-bold text-[13px] uppercase tracking-wider text-primary">Tanggal &amp; Waktu</th>
-                            <th class="px-8 py-5 font-headline font-bold text-[13px] uppercase tracking-wider text-primary">Lokasi</th>
-                            <th class="px-8 py-5 font-headline font-bold text-[13px] uppercase tracking-wider text-primary text-center">Jenis</th>
-                            <th class="px-8 py-5 font-headline font-bold text-[13px] uppercase tracking-wider text-primary">Aktivitas</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-outline-variant/20">
-                        @foreach($club->schedules as $schedule)
-                        <tr class="table-row-hover transition-colors duration-200">
-                            <td class="px-8 py-6 font-semibold text-primary font-body">{{ \Carbon\Carbon::parse($schedule->schedule_time)->format('d M, H:i') }}</td>
-                            <td class="px-8 py-6 text-on-surface font-medium">{{ $schedule->location ?? 'Belum ditentukan' }}</td>
-                            <td class="px-8 py-6 text-center">
-                                <span class="inline-flex items-center px-3 py-1 text-secondary rounded-full text-[11px] font-bold uppercase tracking-widest border border-secondary/20 bg-secondary-fixed/30">
-                                    Aktivitas
-                                </span>
-                            </td>
-                            <td class="px-8 py-6 text-on-surface-variant text-sm font-medium">
-                                {{ $schedule->description ?? 'Rutin Mingguan' }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    {{-- Unified Header Card --}}
+    <div class="bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden mb-6">
+        <div class="px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            {{-- Club Identity --}}
+            <div class="flex items-center gap-4">
+                @if($club->banner_image)
+                    <img src="{{ asset('storage/' . $club->banner_image) }}" alt="{{ $club->name }}" class="w-20 h-20 rounded-xl object-cover ring-2 ring-zinc-100">
                 @else
-                <div class="p-8 text-center text-outline">
-                    <span class="material-symbols-outlined text-4xl mb-2">event_busy</span>
-                    <p>Sesi jadwal aktivitas belum terbuka atau belum dijadwalkan.</p>
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold text-white" style="background: var(--accent);">{{ substr($club->name, 0, 2) }}</div>
+                @endif
+                <div>
+                    <h1 class="text-xl font-bold text-zinc-900 leading-tight tracking-tight">{{ $club->name }}</h1>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="inline-flex text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full" style="background: var(--accent-light); color: var(--accent-text);">{{ $club->category->name }}</span>
+                        <span class="text-[10px] text-zinc-400">•</span>
+                        <span class="text-[10px] font-medium text-zinc-400">Pembina: {{ $club->coach->name ?? '-' }}</span>
+                    </div>
                 </div>
-                @endif
             </div>
-
-            <!-- Tabel Materi (Jika di database ada $club->materials, misal) -->
-            <div class="flex items-center gap-4 mb-4 mt-8">
-                <div class="h-8 w-1.5 bg-primary rounded-full"></div>
-                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-headline">Materi &amp; Berkas</h2>
-                <div class="h-[1px] flex-grow bg-outline-variant/30 ml-4"></div>
+            {{-- Quick Stats (desktop only) --}}
+            <div class="hidden md:flex items-center gap-5">
+                <div class="text-center">
+                    <div class="text-lg font-bold text-zinc-900 leading-none tabular-nums">{{ $club->schedules ? $club->schedules->count() : 0 }}</div>
+                    <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Jadwal</div>
+                </div>
+                <div class="w-px h-8 bg-zinc-100"></div>
+                <div class="text-center">
+                    <div class="text-lg font-bold text-zinc-900 leading-none tabular-nums">{{ $club->materials ? $club->materials->count() : 0 }}</div>
+                    <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Materi</div>
+                </div>
             </div>
-            
-            <div class="space-y-4">
-                @if($club->materials && $club->materials->isNotEmpty())
-                    @foreach($club->materials as $material)
-                    <div class="flex items-center justify-between p-5 bg-white border border-outline-variant/20 rounded-xl hover:shadow-md hover:border-secondary transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined">description</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary">{{ $material->title }}</h4>
-                                <p class="text-xs text-outline">{{ $material->created_at->format('d M Y') }}</p>
-                            </div>
-                        </div>
-                        @if($material->file_path)
-                            <a href="{{ Storage::url($material->file_path) }}" target="_blank" class="download-btn flex items-center justify-center w-10 h-10 bg-secondary/10 rounded-full text-secondary hover:bg-secondary hover:text-white transition-colors cursor-pointer">
-                                <span class="material-symbols-outlined text-xl">download</span>
-                            </a>
-                        @endif
-                    </div>
-                    @endforeach
-                @else
-                    <div class="p-8 text-center text-outline bg-surface-container-low rounded-xl border border-dashed border-outline-variant">
-                        <span class="material-symbols-outlined text-4xl mb-2">folder_off</span>
-                        <p>Belum ada modul atau berkas akademik yang dibagikan.</p>
-                    </div>
-                @endif
-            </div>
-
+        </div>
+        {{-- Integrated Tab Navigation --}}
+        <div class="border-t border-zinc-100 px-6 flex items-center gap-1 overflow-x-auto">
+            <a href="{{ route('club.show', $club->slug) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Beranda</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'news']) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Berita & Prestasi</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'gallery']) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Galeri</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'academic']) }}" class="relative px-4 py-3 text-xs font-bold whitespace-nowrap transition-colors no-underline" style="color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent);">Akademik</a>
         </div>
     </div>
 
-    <!-- Sticky Sidebar -->
-    <aside class="w-full lg:w-[30%] space-y-8">
-        <div class="sticky top-28 space-y-8">
+    {{-- Schedule + Sidebar Bento --}}
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+
+        {{-- Schedule Card --}}
+        <section class="lg:col-span-2 bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-100">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--accent-light);">
+                        <svg class="w-4 h-4" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h2 class="text-sm font-bold text-zinc-900 tracking-tight">Jadwal Kegiatan</h2>
+                </div>
+                @if($club->schedules && $club->schedules->isNotEmpty())
+                    <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full" style="background: var(--accent-light); color: var(--accent-text);">{{ $club->schedules->count() }} upcoming</span>
+                @endif
+            </div>
+
+            @if($club->schedules && $club->schedules->isNotEmpty())
+                {{-- Table header --}}
+                <div class="hidden md:grid grid-cols-12 gap-4 px-5 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 bg-zinc-50/80 border-b border-zinc-100">
+                    <div class="col-span-3">Waktu</div>
+                    <div class="col-span-3">Lokasi</div>
+                    <div class="col-span-2">Jenis</div>
+                    <div class="col-span-4">Aktivitas</div>
+                </div>
+                <div class="divide-y divide-zinc-50">
+                    @foreach($club->schedules as $i => $schedule)
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 px-5 py-4 items-center hover:bg-zinc-50/50 transition-colors duration-200">
+                            <div class="md:col-span-3 flex items-center gap-2.5">
+                                <div class="w-2 h-2 rounded-full flex-shrink-0" style="background: var(--accent);"></div>
+                                <span class="text-[13px] font-bold tabular-nums text-zinc-900">{{ \Carbon\Carbon::parse($schedule->schedule_time)->format('d M, H:i') }}</span>
+                            </div>
+                            <div class="md:col-span-3 text-[13px] text-zinc-600">{{ $schedule->location ?? 'TBD' }}</div>
+                            <div class="md:col-span-2">
+                                <span class="inline-flex text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md" style="background: var(--accent-medium); color: var(--accent-text);">{{ ucfirst($schedule->type ?? 'Aktivitas') }}</span>
+                            </div>
+                            <div class="md:col-span-4 text-xs text-zinc-400">{{ $schedule->description ?? 'Rutin Mingguan' }}</div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="py-16 text-center">
+                    <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center bg-zinc-100">
+                        <svg class="w-5 h-5 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <p class="text-xs font-medium text-zinc-400">Belum ada jadwal yang dijadwalkan</p>
+                </div>
+            @endif
+        </section>
+
+        {{-- Sidebar --}}
+        <div class="space-y-5">
             @include('pages.partials.sidebar')
         </div>
-    </aside>
-</main>
+    </div>
+
+    {{-- Materials Card (Full-Width) --}}
+    <section class="bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-100">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--accent-light);">
+                    <svg class="w-4 h-4" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <h2 class="text-sm font-bold text-zinc-900 tracking-tight">Materi & Berkas</h2>
+            </div>
+            @if($club->materials && $club->materials->isNotEmpty())
+                <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full" style="background: var(--accent-light); color: var(--accent-text);">{{ $club->materials->count() }} file</span>
+            @endif
+        </div>
+
+        @if($club->materials && $club->materials->isNotEmpty())
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-100">
+                @foreach($club->materials as $material)
+                    <div class="flex items-center justify-between px-5 py-4 hover:bg-zinc-50/50 transition-colors duration-200 group {{ !$loop->last && $loop->iteration % 2 === 0 ? 'md:border-t md:border-zinc-100' : '' }}">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: var(--accent-light);">
+                                <svg class="w-4.5 h-4.5" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-sm font-semibold text-zinc-800 truncate group-hover:text-zinc-900 transition-colors">{{ $material->title }}</div>
+                                <div class="text-[10px] text-zinc-400 mt-0.5">{{ $material->created_at->format('d M Y') }}</div>
+                            </div>
+                        </div>
+                        @if($material->file_path)
+                            <a href="{{ asset('storage/' . $material->file_path) }}" target="_blank" class="ml-3 inline-flex items-center gap-1.5 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-wider rounded-lg transition-all duration-200 flex-shrink-0 hover:shadow-sm no-underline" style="background: var(--accent-light); color: var(--accent-text);">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                Unduh
+                            </a>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="py-14 text-center">
+                <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center bg-zinc-100">
+                    <svg class="w-5 h-5 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <p class="text-xs font-medium text-zinc-400">Belum ada materi yang dibagikan</p>
+            </div>
+        @endif
+    </section>
+
+</div>
 @endsection

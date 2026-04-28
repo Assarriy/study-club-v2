@@ -1,37 +1,44 @@
-<!-- Advisor Card -->
-<div class="bg-white rounded-2xl p-10 shadow-lg border border-surface-container-high relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -mr-12 -mt-12"></div>
-    <div class="flex flex-col items-center text-center relative z-10">
-        <div class="w-28 h-28 bg-primary text-secondary-fixed rounded-full flex items-center justify-center text-4xl font-headline font-extrabold mb-6 shadow-2xl ring-4 ring-secondary-fixed/30">
-            {{ strtoupper(substr($club->coach->name ?? 'P B', 0, 2)) }}
-        </div>
-        <h4 class="font-headline text-2xl font-bold text-primary">{{ $club->coach->name ?? 'Belum ada Pembina' }}</h4>
-        <p class="text-secondary font-bold text-xs uppercase tracking-widest mt-2">Dosen/Pembina Akademik</p>
-        
-        <div class="w-full mt-10 pt-10 border-t border-slate-100 grid grid-cols-2 gap-8">
-            <div class="text-center group">
-                <span class="block text-3xl font-black text-primary group-hover:text-secondary transition-colors">{{ $club->galleries()->count() }}</span>
-                <span class="text-[10px] text-outline font-extrabold tracking-widest uppercase">GALERI</span>
+{{-- ══ Advisor Card — Modern SaaS ══ --}}
+<div class="bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md">
+    <div class="px-5 py-3 bg-zinc-50 border-b border-zinc-100">
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Pembina</span>
+    </div>
+    <div class="p-5">
+        <div class="flex items-center gap-4 mb-5">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold text-white" style="background: var(--accent, #2563EB);">
+                {{ strtoupper(substr($club->coach->name ?? 'PB', 0, 2)) }}
             </div>
-            <div class="text-center group">
-                <span class="block text-3xl font-black text-primary group-hover:text-secondary transition-colors">{{ $club->posts()->count() }}</span>
-                <span class="text-[10px] text-outline font-extrabold tracking-widest uppercase">ARTIKEL</span>
+            <div>
+                <div class="text-sm font-bold text-zinc-900">{{ $club->coach->name ?? 'Belum ada Pembina' }}</div>
+                <div class="text-[10px] font-medium text-zinc-400 mt-0.5">Dosen / Pembina</div>
+            </div>
+        </div>
+        <div class="h-px bg-zinc-100 mb-4"></div>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="text-center py-3.5 rounded-xl bg-zinc-50 border border-zinc-100 transition-all duration-200 hover:border-zinc-200 hover:shadow-sm">
+                <div class="text-2xl font-bold text-zinc-900 tabular-nums">{{ $club->galleries()->count() }}</div>
+                <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Galeri</div>
+            </div>
+            <div class="text-center py-3.5 rounded-xl bg-zinc-50 border border-zinc-100 transition-all duration-200 hover:border-zinc-200 hover:shadow-sm">
+                <div class="text-2xl font-bold text-zinc-900 tabular-nums">{{ $club->posts()->count() }}</div>
+                <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Artikel</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Registration CTA -->
+{{-- ══ Registration CTA ══ --}}
 @include('pages.partials.registration-cta')
 
-<!-- Info Card -->
-<div class="bg-primary p-8 rounded-2xl shadow-xl relative overflow-hidden">
-    <div class="absolute inset-0 bg-white opacity-5 mix-blend-overlay"></div>
-    <h5 class="font-headline font-bold text-secondary-fixed text-base flex items-center gap-3 relative z-10">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
-        Informasi Pendaftaran
-    </h5>
-    <p class="text-sm text-primary-fixed leading-relaxed font-semibold mt-4 relative z-10 opacity-90">
-        Pendaftaran porseni/anggota periode Ganjil masih dibuka. Pastikan Anda telah memiliki komitmen yang cukup untuk tergabung bersama klub ini.
-    </p>
+{{-- ══ Info Card — Accent tinted ══ --}}
+<div class="rounded-2xl p-5 border transition-shadow duration-300 hover:shadow-sm" style="background: var(--accent-light, #EFF6FF); border-color: var(--accent-medium, #DBEAFE);">
+    <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white" style="background: var(--accent, #2563EB);">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+            <div class="text-xs font-bold uppercase tracking-wider mb-1" style="color: var(--accent-text, #1e40af);">Info Pendaftaran</div>
+            <p class="text-xs leading-relaxed" style="color: var(--accent-dark, #1d4ed8); opacity: 0.8;">Pendaftaran porseni/anggota periode Ganjil masih dibuka. Pastikan Anda memiliki komitmen yang cukup.</p>
+        </div>
+    </div>
 </div>
