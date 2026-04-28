@@ -69,7 +69,7 @@ class FrontEndController extends Controller
 
         $isRegistered = false;
         if (Auth::check()) {
-            $isRegistered = \App\Models\Registration::where('user_id', Auth::id())
+            $isRegistered = Registration::where('user_id', Auth::id())
                                 ->where('study_club_id', $club->id)
                                 ->exists();
         }
@@ -189,5 +189,38 @@ class FrontEndController extends Controller
 
         // Must be 10-13 digits after normalization
         return strlen($phone) >= 10 && strlen($phone) <= 13 && preg_match('/^\d+$/', $phone);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q', '');
+
+        $clubs = StudyClub::with(['category', 'coach'])
+            ->where('is_active', true)
+            ->where(function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%")
+                    ->orWhere('slug', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%")
+                    ->orWhereHas('category', function ($q) use ($query) {
+                        $q->where('name', 'like', "%$query%");
+                    });
+            })
+            ->take(10)
+            ->get();
+
+        return response()->json($clubs);
+    }
+
+    public function filterByCategory(Request $request, $categoryId = null)
+    {
+        $query = StudyClub::with(['category', 'coach'])->where('is_active', true);
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        $clubs = $query->latest()->get();
+
+        return response()->json($clubs);
     }
 }
