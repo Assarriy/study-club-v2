@@ -148,7 +148,8 @@ class FrontEndController extends Controller
             $message = "Halo Coach *" . $club->coach->name . "*,\n\n";
             $message .= "Saya *" . $user->name . "* ingin mendaftar ke Study Club *" . $club->name . "*.\n\n";
             $message .= "*Motivasi:* \n" . $request->motivation . "\n\n";
-            $message .= "Mohon untuk ditinjau pendaftaran saya di sistem. Terima kasih!";
+            $message .= "Mohon untuk ditinjau pendaftaran saya di sistem melalui link berikut:\n";
+            $message .= \App\Filament\Resources\StudyClubs\StudyClubResource::getUrl('edit', ['record' => $club->id]) . "\n\nTerima kasih!";
 
             // Encode pesan agar aman untuk URL
             $waUrl = "https://api.whatsapp.com/send?phone=" . $coachPhone . "&text=" . urlencode($message);
