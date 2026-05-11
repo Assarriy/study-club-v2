@@ -1,44 +1,52 @@
-{{-- ══ Advisor Card — Modern SaaS ══ --}}
-<div class="bg-white rounded-2xl border border-zinc-200/80 shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-md">
-    <div class="px-5 py-3 bg-zinc-50 border-b border-zinc-100">
-        <span class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Pembina</span>
+{{-- ── Advisor Card ── --}}
+<div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden card-lift">
+    <div class="px-5 py-3.5 border-b border-slate-100 flex items-center gap-2"
+         style="background: linear-gradient(to right, var(--accent-light, #EFF6FF), white);">
+        <div class="w-1.5 h-4 rounded-full" style="background: var(--accent, #2563EB);"></div>
+        <span class="text-[10px] font-bold uppercase tracking-widest" style="color: var(--accent-text, #1e40af);">Pembina Club</span>
     </div>
     <div class="p-5">
-        <div class="flex items-center gap-4 mb-5">
-            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold text-white" style="background: var(--accent, #2563EB);">
+        <div class="flex items-center gap-3.5 mb-5">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-extrabold text-white shadow-md flex-shrink-0"
+                 style="background: linear-gradient(135deg, var(--accent, #2563EB), var(--accent-dark, #1d4ed8));">
                 {{ strtoupper(substr($club->coach->name ?? 'PB', 0, 2)) }}
             </div>
             <div>
-                <div class="text-sm font-bold text-zinc-900">{{ $club->coach->name ?? 'Belum ada Pembina' }}</div>
-                <div class="text-[10px] font-medium text-zinc-400 mt-0.5">Dosen / Pembina</div>
+                <div class="text-sm font-bold text-slate-900">{{ $club->coach->name ?? 'Belum ada Pembina' }}</div>
+                <div class="text-[10px] font-medium text-slate-400 mt-0.5">Pembina / Coach</div>
             </div>
         </div>
-        <div class="h-px bg-zinc-100 mb-4"></div>
+        <div class="h-px bg-slate-100 mb-4"></div>
         <div class="grid grid-cols-2 gap-3">
-            <div class="text-center py-3.5 rounded-xl bg-zinc-50 border border-zinc-100 transition-all duration-200 hover:border-zinc-200 hover:shadow-sm">
-                <div class="text-2xl font-bold text-zinc-900 tabular-nums">{{ $club->galleries()->count() }}</div>
-                <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Galeri</div>
+            <div class="text-center py-3.5 rounded-2xl border transition-all duration-200 hover:shadow-sm"
+                 style="background: var(--accent-light, #EFF6FF); border-color: var(--accent-medium, #DBEAFE);">
+                <div class="text-2xl font-extrabold tabular-nums" style="color: var(--accent, #2563EB);">{{ $club->galleries()->count() }}</div>
+                <div class="text-[9px] font-bold uppercase tracking-widest mt-0.5" style="color: var(--accent-text, #1e40af);">Galeri</div>
             </div>
-            <div class="text-center py-3.5 rounded-xl bg-zinc-50 border border-zinc-100 transition-all duration-200 hover:border-zinc-200 hover:shadow-sm">
-                <div class="text-2xl font-bold text-zinc-900 tabular-nums">{{ $club->posts()->count() }}</div>
-                <div class="text-[9px] font-semibold uppercase tracking-wider text-zinc-400 mt-0.5">Artikel</div>
+            <div class="text-center py-3.5 rounded-2xl border transition-all duration-200 hover:shadow-sm"
+                 style="background: var(--accent-light, #EFF6FF); border-color: var(--accent-medium, #DBEAFE);">
+                <div class="text-2xl font-extrabold tabular-nums" style="color: var(--accent, #2563EB);">{{ $club->posts()->count() }}</div>
+                <div class="text-[9px] font-bold uppercase tracking-widest mt-0.5" style="color: var(--accent-text, #1e40af);">Artikel</div>
             </div>
         </div>
     </div>
 </div>
 
-{{-- ══ Registration CTA ══ --}}
+{{-- ── Registration CTA ── --}}
 @include('pages.partials.registration-cta')
 
-{{-- ══ Info Card — Accent tinted ══ --}}
-<div class="rounded-2xl p-5 border transition-shadow duration-300 hover:shadow-sm" style="background: var(--accent-light, #EFF6FF); border-color: var(--accent-medium, #DBEAFE);">
-    <div class="flex items-start gap-3">
-        <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white" style="background: var(--accent, #2563EB);">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+{{-- ── Info Card ── --}}
+<div class="rounded-3xl p-5 border relative overflow-hidden"
+     style="background: linear-gradient(135deg, var(--accent, #2563EB), var(--accent-dark, #1d4ed8)); border-color: var(--accent-dark, #1d4ed8);">
+    <div class="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/5 -mr-8 -mt-8 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-white/5 -ml-6 -mb-6 pointer-events-none"></div>
+    <div class="relative z-10 flex items-start gap-3">
+        <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 bg-white/20">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div>
-            <div class="text-xs font-bold uppercase tracking-wider mb-1" style="color: var(--accent-text, #1e40af);">Info Pendaftaran</div>
-            <p class="text-xs leading-relaxed" style="color: var(--accent-dark, #1d4ed8); opacity: 0.8;">Pendaftaran porseni/anggota periode Ganjil masih dibuka. Pastikan Anda memiliki komitmen yang cukup.</p>
+            <div class="text-xs font-bold uppercase tracking-wider text-white mb-1">Info Pendaftaran</div>
+            <p class="text-xs leading-relaxed text-blue-100">Pendaftaran periode Ganjil masih dibuka. Pastikan Anda memiliki komitmen yang cukup.</p>
         </div>
     </div>
 </div>

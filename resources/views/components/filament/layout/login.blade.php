@@ -81,12 +81,12 @@
             margin-bottom: 1.75rem;
         }
         .fi-login-card {
-            background: #ffffff;
-            backdrop-filter: none;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
             padding: 1.75rem 2rem;
             border-radius: 1.5rem;
-            border: 1px solid rgba(228, 228, 231, 0.8);
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 20px 60px rgba(15,23,42,0.10), 0 4px 16px rgba(15,23,42,0.06);
         }
         .fi-login-footer-text {
             margin-top: 1.25rem; text-align: center;
@@ -99,33 +99,27 @@
         .fi-login-footer-text a:hover { color: #F59E0B; }
 
         /* ── Filament form overrides ── */
-        .fi-login-card label,
-        .fi-login-card label span,
-        .fi-login-card .fi-fo-field-wrp-label span {
+        .fi-login-card .fi-fo-field-wrp > label,
+        .fi-login-card label {
             font-size: 0.875rem !important;
             font-weight: 600 !important;
-            color: #71717a !important; /* text-zinc-500 */
+            color: #334155 !important;
         }
-        
-        .fi-login-card .fi-input-wrp {
-            border-radius: 0.75rem !important; /* rounded-xl */
-            border: 1px solid #e4e4e7 !important; /* border-zinc-200 */
-            background-color: white !important; /* bg-zinc-50 */
-            box-shadow: none !important;
-            transition: all 0.2s !important;
-        }
-        .fi-login-card .fi-input-wrp:focus-within {
-            border-color: #60a5fa !important; /* focus:border-blue-400 */
-            background-color: #ffffff !important; /* focus:bg-white */
-            box-shadow: 0 0 0 2px #dbeafe !important; /* focus:ring-blue-100 */
-        }
-        .fi-login-card .fi-input-wrp input,
-        .fi-login-card input.fi-input {
-            background: transparent !important;
-            color: black !important; /* text-zinc-800 */
+        .fi-login-card input.fi-input,
+        .fi-login-card .fi-input-wrp input {
+            border-radius: 0.875rem !important;
+            border-color: #E2E8F0 !important;
+            background: #F8FAFC !important;
             padding: 0.75rem 1rem !important;
             font-size: 0.875rem !important;
             font-family: 'Plus Jakarta Sans', sans-serif !important;
+            transition: all 0.2s !important;
+        }
+        .fi-login-card input.fi-input:focus,
+        .fi-login-card .fi-input-wrp input:focus {
+            border-color: #2563EB !important;
+            background: white !important;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important;
         }
         .fi-login-card .fi-btn.fi-btn-primary,
         .fi-login-card button[type="submit"] {
@@ -135,9 +129,9 @@
             border-radius: 0.875rem !important;
             font-weight: 700 !important;
             font-size: 0.875rem !important;
-            background: #2563eb !important;
+            background: linear-gradient(135deg, #2563EB, #1d4ed8) !important;
             color: #ffffff !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 6px -1px rgba(37, 99, 235, 0.2) !important;
+            box-shadow: 0 8px 24px rgba(37,99,235,0.35) !important;
             transition: all 0.25s ease !important;
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             border: none !important;
@@ -147,7 +141,6 @@
         .fi-login-card .fi-btn.fi-btn-primary:hover,
         .fi-login-card button[type="submit"]:hover {
             transform: translateY(-2px) !important;
-            background: #1d4ed8 !important;
             box-shadow: 0 12px 32px rgba(37,99,235,0.45) !important;
         }
         .fi-login-card .fi-btn.fi-btn-primary:active,
