@@ -38,8 +38,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Otomatis pasangkan role 'siswa'
-        $user->assignRole('siswa');
+        // Pastikan role 'siswa' ada di database, jika belum maka buat otomatis
+        $roleSiswa = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'siswa']);
+        $user->assignRole($roleSiswa);
 
         // Langsung login-kan siswa tersebut
         Auth::login($user);

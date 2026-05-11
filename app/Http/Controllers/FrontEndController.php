@@ -87,6 +87,28 @@ class FrontEndController extends Controller
         return view('pages.detail', compact('club', 'isRegistered'));
     }
 
+    public function showPost($slug, $postSlug)
+    {
+        $club = StudyClub::where('slug', $slug)->firstOrFail();
+        $post = \App\Models\Post::where('study_club_id', $club->id)->where('slug', $postSlug)->firstOrFail();
+
+        $isRegistered = false;
+        if (Auth::check()) {
+            $isRegistered = Registration::where('user_id', Auth::id())
+                                ->where('study_club_id', $club->id)
+                                ->exists();
+        }
+
+        return view('pages.post-detail', compact('club', 'post', 'isRegistered'));
+    }
+
+    public function showAchievement($slug, $id)
+    {
+        $club = StudyClub::where('slug', $slug)->firstOrFail();
+        $achievement = \App\Models\Achievement::where('study_club_id', $club->id)->findOrFail($id);
+        return view('pages.achievement-detail', compact('club', 'achievement'));
+    }
+
     public function register(Request $request, $slug)
     {
         // Ensure user is authenticated
