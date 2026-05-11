@@ -147,8 +147,7 @@
                     </div>
 
                     @if($club->vision || $club->mission)
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="flex flex-col gap-4 mt-8 p-6 bg-slate-50 rounded-2xl border border-slate-100">
                             <div>
                                 <div
                                     class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-brand-blue/10 text-brand-blue font-bold text-sm mb-3">
@@ -274,20 +273,22 @@
                         </h2>
                         <div class="space-y-4">
                             @foreach($club->posts as $post)
-                                <div
-                                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex gap-6 hover:shadow-md transition">
-                                    @if($post->image)
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Thumbnail"
-                                            class="w-32 h-32 object-cover rounded-xl flex-shrink-0">
-                                    @endif
-                                    <div>
-                                        <p class="text-[10px] font-bold text-brand-blue mb-2 uppercase tracking-wider">
-                                            {{ $post->created_at->format('d M Y') }}</p>
-                                        <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">{{ $post->title }}</h3>
-                                        <div class="text-sm text-slate-500 line-clamp-2 prose">
-                                            {!! strip_tags($post->content) !!}</div>
+                                <a href="{{ route('club.post.show', ['slug' => $club->slug, 'postSlug' => $post->slug]) }}"
+                                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex gap-6 hover:shadow-md transition no-underline text-inherit block group">
+                                    <div class="flex gap-6 w-full">
+                                        @if($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="Thumbnail"
+                                                class="w-32 h-32 object-cover rounded-xl flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                                        @endif
+                                        <div>
+                                            <p class="text-[10px] font-bold text-brand-blue mb-2 uppercase tracking-wider">
+                                                {{ $post->created_at->format('d M Y') }}</p>
+                                            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight group-hover:text-brand-blue transition-colors">{{ $post->title }}</h3>
+                                            <div class="text-sm text-slate-500 line-clamp-2 prose">
+                                                {!! strip_tags($post->content) !!}</div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             @endforeach
                         </div>
                     </section>
@@ -350,12 +351,33 @@
                         <h3 class="font-bold text-slate-900 mb-4">Galeri Kegiatan</h3>
                         <div class="grid grid-cols-2 gap-3">
                             @foreach($club->galleries->take(4) as $item)
-                                @if($item->type === 'photo')
-                                    <div class="aspect-square rounded-xl overflow-hidden bg-slate-100 shadow-inner group">
-                                        <img src="{{ asset('storage/' . $item->media_path) }}" alt="Galeri"
+                                @php
+                                    $isYoutube = false;
+                                    $ytId = '';
+                                    if (Str::contains($item->media_path, ['youtube.com', 'youtu.be'])) {
+                                        $isYoutube = true;
+                                        preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $item->media_path, $matches);
+                                        $ytId = $matches[1] ?? '';
+                                    }
+                                @endphp
+                                <div class="aspect-square rounded-xl overflow-hidden bg-slate-100 shadow-inner group relative">
+                                    @if($isYoutube && $ytId)
+                                        <img src="https://img.youtube.com/vi/{{ $ytId }}/hqdefault.jpg" alt="{{ $item->title ?? 'Video Galeri' }}"
                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    </div>
-                                @endif
+                                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                            <div class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                    @elseif($item->media_path)
+                                        <img src="{{ asset('storage/' . $item->media_path) }}" alt="{{ $item->title ?? 'Galeri' }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center bg-slate-200">
+                                            <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        </div>
+                                    @endif
+                                </div>
                             @endforeach
                         </div>
                     </div>
