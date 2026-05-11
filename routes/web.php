@@ -31,6 +31,9 @@ Route::post('/club/{slug}/register', [FrontEndController::class, 'register'])
     ->name('club.register')
     ->middleware('auth');
 
+Route::get('/club/{slug}/post/{postSlug}', [FrontEndController::class, 'showPost'])->name('club.post.show');
+Route::get('/club/{slug}/achievement/{id}', [FrontEndController::class, 'showAchievement'])->name('club.achievement.show');
+
 // Route khusus untuk tamu (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
