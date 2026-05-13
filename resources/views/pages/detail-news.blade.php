@@ -9,7 +9,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2 space-y-5">
-
                 {{-- Achievements --}}
                 <section class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal">
                     <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-slate-100">

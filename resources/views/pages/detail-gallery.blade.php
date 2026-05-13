@@ -6,6 +6,10 @@
 
     @include('pages.partials.club-header', ['activeTab' => 'gallery'])
 
+<div style="--accent:#2563EB; --accent-light:#EFF6FF; --accent-medium:#DBEAFE; --accent-text:#1e40af; --accent-dark:#1d4ed8;">
+
+    @include('pages.partials.club-header', ['activeTab' => 'gallery'])
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2">
@@ -68,8 +72,35 @@
                                 </div>
                             </div>
                         </div>
-                        @else
-                        {{-- Photo Card --}}
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="border-t border-zinc-100 px-6 flex items-center gap-1 overflow-x-auto">
+            <a href="{{ route('club.show', $club->slug) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Beranda</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'news']) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Berita & Prestasi</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'gallery']) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap transition-colors no-underline" style="color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent);">Galeri</a>
+            <a href="{{ route('club.show', ['slug' => $club->slug, 'tab' => 'academic']) }}" class="relative px-4 py-3 text-xs font-semibold whitespace-nowrap text-zinc-400 hover:text-zinc-700 transition-colors no-underline">Akademik</a>
+        </div>
+    </div>
+<div style="--accent:#2563EB; --accent-light:#EFF6FF; --accent-medium:#DBEAFE; --accent-text:#1e40af; --accent-dark:#1d4ed8;">
+
+    @include('pages.partials.club-header', ['activeTab' => 'gallery'])
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+                @if($club->galleries->isEmpty())
+                    <div class="bg-white rounded-3xl border-2 border-dashed border-slate-200 py-20 text-center reveal">
+                        <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-slate-100">
+                            <svg class="w-7 h-7 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <p class="text-sm font-medium text-slate-400">Belum ada foto kegiatan.</p>
+                    </div>
+                @else
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                        @foreach($club->galleries as $i => $gallery)
                         <div class="card-lift group bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal reveal-delay-{{ $i % 2 + 1 }}">
                             <div class="relative h-48 sm:h-56 overflow-hidden bg-slate-100">
                                 <img alt="{{ $gallery->title ?? 'Galeri' }}"
@@ -91,16 +122,8 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
-
                         @endforeach
                     </div>
-
-                    @if($galleries->hasPages())
-                        <div class="mt-8 px-2">
-                            {{ $galleries->links() }}
-                        </div>
-                    @endif
                 @endif
             </div>
 
