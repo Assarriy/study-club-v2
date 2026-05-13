@@ -11,7 +11,7 @@
 
         {{-- Schedule + Sidebar --}}
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <section class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal">
+            <section class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal" id="schedule-section" data-ajax-container>
                 <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-slate-100">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style="background: var(--accent-light);">
@@ -60,7 +60,7 @@
 
                     @if($schedules->hasPages())
                         <div class="px-5 py-4 border-t border-slate-100">
-                            {{ $schedules->links() }}
+                            {{ $schedules->links('partials.pagination') }}
                         </div>
                     @endif
                 @else
@@ -79,7 +79,7 @@
         </div>
 
         {{-- Materials --}}
-        <section class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal reveal-delay-2">
+        <section class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal reveal-delay-2" id="materials-section" data-ajax-container>
             <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style="background: var(--accent-light);">
@@ -119,7 +119,7 @@
 
                 @if($materials->hasPages())
                     <div class="px-5 py-4 border-t border-slate-100">
-                        {{ $materials->links() }}
+                        {{ $materials->links('partials.pagination') }}
                     </div>
                 @endif
             @else

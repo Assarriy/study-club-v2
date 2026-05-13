@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-2" id="gallery-section" data-ajax-container>
                 @if($galleries->isEmpty())
                     <div class="bg-white rounded-3xl border-2 border-dashed border-slate-200 py-20 text-center reveal">
                         <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-slate-100">
@@ -78,6 +78,15 @@
                         @endif
                         @endforeach
                     </div>
+<<<<<<< Updated upstream
+=======
+
+                    @if($galleries->hasPages())
+                        <div class="mt-8 px-2">
+                            {{ $galleries->links('partials.pagination') }}
+                        </div>
+                    @endif
+>>>>>>> Stashed changes
                 @endif
             </div>
 
