@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- ── Club Identity Card (overlapping banner) ── --}}
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/60 overflow-hidden -mt-10 sm:-mt-14 relative z-10 mb-6">
@@ -57,10 +57,10 @@
         </div>
 
         {{-- ── Main Content Grid ── --}}
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-12">
+        <div class="pb-12">
 
             {{-- Article Content --}}
-            <div class="lg:col-span-2 space-y-5">
+            <div class="space-y-5">
 
                 {{-- Article Card --}}
                 <article class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal">
@@ -128,10 +128,6 @@
 
             </div>
 
-            {{-- Sidebar --}}
-            <div class="space-y-4 reveal reveal-delay-2">
-                @include('pages.partials.sidebar')
-            </div>
         </div>
     </div>
 </div>
