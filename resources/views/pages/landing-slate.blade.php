@@ -174,6 +174,13 @@
                     </div>
                 @endforelse
             </div>
+
+            {{-- Pagination --}}
+            @if($clubs->hasPages())
+                <div class="mt-12 flex justify-center">
+                    {{ $clubs->links('pagination::tailwind') }}
+                </div>
+            @endif
         </div>
     </section>
 

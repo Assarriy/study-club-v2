@@ -100,64 +100,6 @@
 
                 {{-- Visi & Misi --}}
                 @if($club->vision || $club->mission)
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal reveal-delay-1">
-                    @if($club->vision)
-                    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
-                        <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2"
-                             style="background: linear-gradient(to right, var(--accent-light), white);">
-                            <div class="w-1.5 h-4 rounded-full" style="background: var(--accent);"></div>
-                            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--accent-text);">Visi</span>
-                        </div>
-                        <div class="p-5 text-sm leading-relaxed prose prose-sm max-w-none text-slate-600">{!! $club->vision !!}</div>
-                    </div>
-                    @endif
-                    @if($club->mission)
-                    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
-                        <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2"
-                             style="background: linear-gradient(to right, var(--accent-light), white);">
-                            <div class="w-1.5 h-4 rounded-full" style="background: var(--accent);"></div>
-                            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--accent-text);">Misi</span>
-                        </div>
-                        <div class="p-5 text-sm leading-relaxed prose prose-sm max-w-none text-slate-600">{!! $club->mission !!}</div>
-                    </div>
-                    @endif
-                </div>
-                @endif
-            </div>
-
-        {{-- Content --}}
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-12">
-            <div class="lg:col-span-2 space-y-5">
-
-                @if(session('success'))
-                    <div class="flex items-start gap-3 px-4 py-3.5 text-sm font-medium bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-2xl reveal">
-                        <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="flex items-start gap-3 px-4 py-3.5 text-sm font-medium bg-red-50 border border-red-200 text-red-700 rounded-2xl reveal">
-                        <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                {{-- About --}}
-                <section class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden reveal">
-                    <div class="flex items-center gap-3 px-5 sm:px-6 py-4 border-b border-slate-100">
-                        <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-                             style="background: var(--accent-light);">
-                            <svg class="w-4 h-4" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h2 class="text-sm font-bold text-slate-900">Tentang Kami</h2>
-                    </div>
-                    <div class="p-5 sm:p-6 text-sm leading-[1.85] prose prose-sm max-w-none text-slate-600">
-                        {!! $club->about ?? $club->description !!}
-                    </div>
-                </section>
-
-                {{-- Visi & Misi --}}
-                @if($club->vision || $club->mission)
                 <div class="flex flex-col gap-4 reveal reveal-delay-1">
                     @if($club->vision)
                     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
@@ -183,10 +125,8 @@
                 @endif
             </div>
 
-            <div class="space-y-4 reveal reveal-delay-2">
-                @include('pages.partials.sidebar')
-            </div>
-            <div class="space-y-4 reveal reveal-delay-2">
+            {{-- Sidebar --}}
+            <div class="space-y-4 reveal reveal-delay-2 self-start">
                 @include('pages.partials.sidebar')
             </div>
         </div>

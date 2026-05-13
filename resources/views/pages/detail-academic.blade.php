@@ -19,12 +19,12 @@
                         </div>
                         <h2 class="text-sm font-bold text-slate-900">Jadwal Kegiatan</h2>
                     </div>
-                    @if($club->schedules && $club->schedules->isNotEmpty())
-                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style="background: var(--accent-light); color: var(--accent-text);">{{ $club->schedules->count() }} upcoming</span>
+                    @if($schedules && $schedules->isNotEmpty())
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style="background: var(--accent-light); color: var(--accent-text);">{{ $schedules->total() }} upcoming</span>
                     @endif
                 </div>
 
-                @if($club->schedules && $club->schedules->isNotEmpty())
+                @if($schedules && $schedules->isNotEmpty())
                     <div class="hidden sm:grid grid-cols-12 gap-4 px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50/80 border-b border-slate-100">
                         <div class="col-span-3">Waktu</div>
                         <div class="col-span-3">Lokasi</div>
@@ -32,7 +32,7 @@
                         <div class="col-span-4">Aktivitas</div>
                     </div>
                     <div class="divide-y divide-slate-50">
-                        @foreach($club->schedules as $schedule)
+                        @foreach($schedules as $schedule)
                             {{-- Mobile --}}
                             <div class="sm:hidden px-5 py-4 hover:bg-slate-50/60 transition-colors">
                                 <div class="flex items-center gap-2 mb-2">
@@ -57,6 +57,12 @@
                             </div>
                         @endforeach
                     </div>
+
+                    @if($schedules->hasPages())
+                        <div class="px-5 py-4 border-t border-slate-100">
+                            {{ $schedules->links() }}
+                        </div>
+                    @endif
                 @else
                     <div class="py-16 text-center">
                         <div class="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center bg-slate-100">
@@ -81,14 +87,14 @@
                     </div>
                     <h2 class="text-sm font-bold text-slate-900">Materi & Berkas</h2>
                 </div>
-                @if($club->materials && $club->materials->isNotEmpty())
-                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style="background: var(--accent-light); color: var(--accent-text);">{{ $club->materials->count() }} file</span>
+                @if($materials && $materials->isNotEmpty())
+                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style="background: var(--accent-light); color: var(--accent-text);">{{ $materials->total() }} file</span>
                 @endif
             </div>
 
-            @if($club->materials && $club->materials->isNotEmpty())
+            @if($materials && $materials->isNotEmpty())
                 <div class="divide-y divide-slate-50">
-                    @foreach($club->materials as $material)
+                    @foreach($materials as $material)
                         <div class="flex items-center justify-between px-5 sm:px-6 py-4 hover:bg-slate-50/60 transition-colors group">
                             <div class="flex items-center gap-3 min-w-0 flex-1">
                                 <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm" style="background: var(--accent-light);">
@@ -110,6 +116,12 @@
                         </div>
                     @endforeach
                 </div>
+
+                @if($materials->hasPages())
+                    <div class="px-5 py-4 border-t border-slate-100">
+                        {{ $materials->links() }}
+                    </div>
+                @endif
             @else
                 <div class="py-14 text-center">
                     <div class="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center bg-slate-100">

@@ -223,6 +223,13 @@
                 <p class="text-sm font-medium text-slate-400">Tidak ada club di kategori ini</p>
             </div>
         </div>
+
+        {{-- Pagination --}}
+        @if($clubs->hasPages())
+            <div class="mt-12 flex justify-center reveal">
+                {{ $clubs->links('pagination::tailwind') }}
+            </div>
+        @endif
     </div>
 </section>
 

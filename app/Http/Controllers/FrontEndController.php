@@ -25,7 +25,7 @@ class FrontEndController extends Controller
                   ->orWhere('description', 'like', '%' . $search . '%');
         }
 
-        $clubs = $query->latest()->get();
+        $clubs = $query->latest()->paginate(1)->withQueryString();
 
         // Support design variant switching via ?design=1|2|3|noir|mono|slate
         $design = $request->query('design');
@@ -47,21 +47,6 @@ class FrontEndController extends Controller
         $club = StudyClub::with([
             'category',
             'coach',
-            'achievements' => function ($query) {
-                $query->orderBy('year', 'desc');
-            },
-            'posts' => function ($query) {
-                $query->where('is_published', true)->latest();
-            },
-            'galleries',
-            // Tambahan untuk jadwal (hanya tampilkan jadwal mulai hari ini ke depan)
-            'schedules' => function ($query) {
-                $query->whereDate('schedule_time', '>=', now())->orderBy('schedule_time', 'asc');
-            },
-            // Tambahan untuk materi
-            'materials' => function ($query) {
-                $query->latest();
-            }
         ])
             ->where('slug', $slug)
             ->where('is_active', true)
@@ -77,11 +62,16 @@ class FrontEndController extends Controller
         $tab = $request->query('tab', 'home');
         
         if ($tab === 'news') {
-            return view('pages.detail-news', compact('club', 'isRegistered'));
+            $posts = $club->posts()->where('is_published', true)->latest()->paginate(6, ['*'], 'posts_page')->withQueryString();
+            $achievements = $club->achievements()->orderBy('year', 'desc')->paginate(6, ['*'], 'ach_page')->withQueryString();
+            return view('pages.detail-news', compact('club', 'isRegistered', 'posts', 'achievements'));
         } elseif ($tab === 'gallery') {
-            return view('pages.detail-gallery', compact('club', 'isRegistered'));
+            $galleries = $club->galleries()->latest()->paginate(12)->withQueryString();
+            return view('pages.detail-gallery', compact('club', 'isRegistered', 'galleries'));
         } elseif ($tab === 'academic') {
-            return view('pages.detail-academic', compact('club', 'isRegistered'));
+            $schedules = $club->schedules()->whereDate('schedule_time', '>=', now())->orderBy('schedule_time', 'asc')->paginate(10, ['*'], 'sch_page')->withQueryString();
+            $materials = $club->materials()->latest()->paginate(10, ['*'], 'mat_page')->withQueryString();
+            return view('pages.detail-academic', compact('club', 'isRegistered', 'schedules', 'materials'));
         }
 
         return view('pages.detail', compact('club', 'isRegistered'));

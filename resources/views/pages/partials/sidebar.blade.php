@@ -46,7 +46,22 @@
         </div>
         <div>
             <div class="text-xs font-bold uppercase tracking-wider text-white mb-1">Info Pendaftaran</div>
-            <p class="text-xs leading-relaxed text-blue-100">Pendaftaran periode Ganjil masih dibuka. Pastikan Anda memiliki komitmen yang cukup.</p>
+            <p class="text-xs leading-relaxed text-blue-100 mb-3">Pastikan Anda memiliki komitmen yang cukup.</p>
         </div>
     </div>
 </div>
+
+@if(!empty($club->social_links))
+    <div class="mt-4">
+        <a href="{{ collect($club->social_links)->first() }}" target="_blank" 
+           class="flex items-center justify-between w-full px-5 py-3.5 bg-white rounded-2xl border border-slate-200/80 shadow-sm transition-all duration-200 hover:shadow-md hover:border-blue-300 group no-underline">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background: var(--accent-light); color: var(--accent);">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                </div>
+                <div class="text-xs font-bold text-slate-700 group-hover:text-blue-600 transition-colors">Platform / URL External</div>
+            </div>
+            <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+    </div>
+@endif
