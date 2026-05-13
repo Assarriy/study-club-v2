@@ -283,7 +283,7 @@
         }, { passive: true });
 
         // ── Scroll reveal ──
-        const revealEls = document.querySelectorAll('.reveal');
+            const revealEls = document.querySelectorAll('.reveal');
         if (revealEls.length) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
@@ -295,6 +295,67 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
             revealEls.forEach(el => observer.observe(el));
         }
+
+        // ── Global AJAX Pagination & Content Loading ──
+        document.addEventListener('click', async (e) => {
+            const link = e.target.closest('a.ajax-link');
+            if (!link) return;
+
+            // Find the closest container with data-ajax-container
+            const container = link.closest('[data-ajax-container]');
+            if (!container) return; // if not found, fallback to normal link behavior
+
+            e.preventDefault();
+            // Prevent other click handlers (like the one in landing.blade.php) from running if we handle it here
+            e.stopPropagation();
+
+            const url = link.href;
+            const containerId = container.id;
+
+            // Visual loading state
+            container.style.transition = 'opacity 0.3s ease';
+            container.style.opacity = '0.5';
+            container.style.pointerEvents = 'none';
+
+            try {
+                const res = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                const html = await res.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                
+                // Find the matching container in the fetched document
+                const newContainer = containerId ? doc.getElementById(containerId) : null;
+                
+                if (newContainer) {
+                    container.innerHTML = newContainer.innerHTML;
+                    
+                    // Update URL silently
+                    window.history.pushState({ path: url }, '', url);
+                    
+                    // Smooth scroll to container top
+                    const y = container.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                    
+                    // Re-trigger reveal animations inside new content
+                    const newReveals = container.querySelectorAll('.reveal');
+                    newReveals.forEach(el => el.classList.add('visible'));
+                } else {
+                    window.location.href = url; // Fallback
+                }
+            } catch (err) {
+                console.error('AJAX Error:', err);
+                window.location.href = url; // Fallback
+            } finally {
+                container.style.opacity = '1';
+                container.style.pointerEvents = 'auto';
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.path) {
+                window.location.reload(); // Simple fallback for back button
+            }
+        });
     </script>
     @stack('scripts')
 </body>

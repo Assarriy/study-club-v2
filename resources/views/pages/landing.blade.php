@@ -142,13 +142,13 @@
 
         {{-- Category filters --}}
         <div class="flex items-center gap-2 flex-wrap justify-center mb-8 reveal" id="category-filters">
-            <button data-category="all" onclick="filterClubs('all')"
-                class="category-btn active-cat px-4 py-2 text-xs font-semibold text-white bg-slate-900 rounded-xl cursor-pointer border-none transition-all duration-200 shadow-sm">
+            <button data-category="all"
+                class="category-btn px-4 py-2 text-xs font-semibold rounded-xl cursor-pointer transition-all duration-200 shadow-sm {{ !request('category') || request('category') == 'all' ? 'text-white bg-slate-900 border-none' : 'text-slate-600 bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-900' }}">
                 Semua
             </button>
             @foreach($categories as $cat)
-                <button data-category="{{ $cat->id }}" onclick="filterClubs('{{ $cat->id }}')"
-                    class="category-btn px-4 py-2 text-xs font-semibold text-slate-600 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-slate-400 hover:text-slate-900 transition-all duration-200 shadow-sm">
+                <button data-category="{{ $cat->id }}"
+                    class="category-btn px-4 py-2 text-xs font-semibold rounded-xl cursor-pointer transition-all duration-200 shadow-sm {{ request('category') == $cat->id ? 'text-white bg-slate-900 border-none' : 'text-slate-600 bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-900' }}">
                     {{ $cat->name }}
                 </button>
             @endforeach
@@ -227,7 +227,7 @@
         {{-- Pagination --}}
         @if($clubs->hasPages())
             <div class="mt-12 flex justify-center reveal">
-                {{ $clubs->links('pagination::tailwind') }}
+                {{ $clubs->links('partials.pagination') }}
             </div>
         @endif
     </div>
@@ -270,30 +270,83 @@
 
 @push('scripts')
 <script>
-    function filterClubs(categoryId) {
-        const cards = document.querySelectorAll('.club-card');
-        const noResults = document.getElementById('no-results');
-        const buttons = document.querySelectorAll('.category-btn');
+    document.addEventListener('DOMContentLoaded', () => {
+        const katalogSection = document.getElementById('katalog');
+        if (!katalogSection) return;
 
-        buttons.forEach(btn => {
-            const isActive = btn.dataset.category == categoryId;
-            btn.classList.toggle('text-white', isActive);
-            btn.classList.toggle('bg-slate-900', isActive);
-            btn.classList.toggle('active-cat', isActive);
-            btn.classList.toggle('text-slate-600', !isActive);
-            btn.classList.toggle('bg-white', !isActive);
-            btn.classList.toggle('border', !isActive);
-            btn.classList.toggle('border-slate-200', !isActive);
-        });
+        let isFetching = false;
 
-        let visible = 0;
-        cards.forEach(card => {
-            const show = categoryId === 'all' || card.dataset.category == categoryId;
-            card.style.display = show ? '' : 'none';
-            if (show) visible++;
+        const fetchContent = async (url) => {
+            if (isFetching) return;
+            isFetching = true;
+
+            try {
+                const grid = document.getElementById('clubs-grid');
+                if(grid) grid.style.opacity = '0.5';
+
+                const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                const html = await response.text();
+                
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const newKatalog = doc.getElementById('katalog');
+                if (newKatalog) {
+                    katalogSection.innerHTML = newKatalog.innerHTML;
+                    
+                    attachListeners();
+                    window.history.pushState({ path: url }, '', url);
+
+                    const revealEls = katalogSection.querySelectorAll('.reveal');
+                    revealEls.forEach(el => el.classList.add('visible'));
+
+                    // Smooth scroll to catalog top
+                    const y = katalogSection.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                }
+            } catch (error) {
+                console.error('Error fetching content:', error);
+            } finally {
+                isFetching = false;
+            }
+        };
+
+        const attachListeners = () => {
+            const buttons = katalogSection.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const categoryId = btn.dataset.category;
+                    const currentUrl = new URL(window.location.href);
+                    if (categoryId === 'all') {
+                        currentUrl.searchParams.delete('category');
+                    } else {
+                        currentUrl.searchParams.set('category', categoryId);
+                    }
+                    currentUrl.searchParams.delete('page');
+                    fetchContent(currentUrl.toString());
+                });
+            });
+
+            const paginationLinks = katalogSection.querySelectorAll('.ajax-link');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    fetchContent(link.href);
+                });
+            });
+        };
+
+        attachListeners();
+
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.path) {
+                fetchContent(e.state.path);
+            } else {
+                fetchContent(window.location.href);
+            }
         });
-        noResults.classList.toggle('hidden', visible > 0);
-    }
+    });
 </script>
 @endpush
 @endsection
