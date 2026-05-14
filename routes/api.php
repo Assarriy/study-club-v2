@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\StudyClubController;
+use App\Http\Controllers\Api\PostController;
 
 // Public Routes
-// Route::post('/login', [AuthController::class, 'login']);
-
-Route::get('/test', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
 // Protected Routes
@@ -21,4 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Study Clubs
     Route::get('/study-clubs', [StudyClubController::class, 'index']);
     Route::get('/study-clubs/{id}', [StudyClubController::class, 'show']);
+
+    // Posts CRUD
+    Route::apiResource('posts', PostController::class);
 });
