@@ -32,7 +32,7 @@ class FrontEndController extends Controller
             $query->where('category_id', $category);
         }
 
-        $clubs = $query->latest()->paginate(1)->withQueryString();
+        $clubs = $query->latest()->paginate(3)->withQueryString();
 
         // Support design variant switching via ?design=1|2|3|noir|mono|slate
         $design = $request->query('design');
@@ -69,15 +69,15 @@ class FrontEndController extends Controller
         $tab = $request->query('tab', 'home');
         
         if ($tab === 'news') {
-            $posts = $club->posts()->where('is_published', true)->latest()->paginate(1, ['*'], 'posts_page')->withQueryString();
-            $achievements = $club->achievements()->orderBy('year', 'desc')->paginate(1, ['*'], 'ach_page')->withQueryString();
+            $posts = $club->posts()->where('is_published', true)->latest()->paginate(2, ['*'], 'posts_page')->withQueryString();
+            $achievements = $club->achievements()->orderBy('year', 'desc')->paginate(2, ['*'], 'ach_page')->withQueryString();
             return view('pages.detail-news', compact('club', 'isRegistered', 'posts', 'achievements'));
         } elseif ($tab === 'gallery') {
-            $galleries = $club->galleries()->latest()->paginate(1)->withQueryString();
+            $galleries = $club->galleries()->latest()->paginate(4)->withQueryString();
             return view('pages.detail-gallery', compact('club', 'isRegistered', 'galleries'));
         } elseif ($tab === 'academic') {
-            $schedules = $club->schedules()->whereDate('schedule_time', '>=', now())->orderBy('schedule_time', 'asc')->paginate(1, ['*'], 'sch_page')->withQueryString();
-            $materials = $club->materials()->latest()->paginate(1, ['*'], 'mat_page')->withQueryString();
+            $schedules = $club->schedules()->whereDate('schedule_time', '>=', now())->orderBy('schedule_time', 'asc')->paginate(4, ['*'], 'sch_page')->withQueryString();
+            $materials = $club->materials()->latest()->paginate(4, ['*'], 'mat_page')->withQueryString();
             return view('pages.detail-academic', compact('club', 'isRegistered', 'schedules', 'materials'));
         }
 

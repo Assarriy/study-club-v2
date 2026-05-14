@@ -78,15 +78,11 @@
                         @endif
                         @endforeach
                     </div>
-<<<<<<< Updated upstream
-=======
-
                     @if($galleries->hasPages())
-                        <div class="mt-8 px-2">
+                        <div class="px-5 py-4 border-t border-slate-100">
                             {{ $galleries->links('partials.pagination') }}
                         </div>
                     @endif
->>>>>>> Stashed changes
                 @endif
             </div>
 
