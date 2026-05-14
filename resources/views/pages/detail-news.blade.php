@@ -24,19 +24,24 @@
                     </div>
 
                     @forelse($achievements as $i => $achievement)
-                        <a href="{{ route('club.achievement.show', ['slug' => $club->slug, 'id' => $achievement->id]) }}" class="flex items-center gap-4 px-5 sm:px-6 py-4 border-b border-slate-50 last:border-b-0 hover:bg-slate-50/60 transition-colors group no-underline text-inherit block">
-                            <div class="flex items-center gap-4 w-full">
-                                <div class="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 font-bold text-sm text-white shadow-sm"
-                                     style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
-                                    {{ $i + 1 }}
+                        <a href="{{ route('club.achievement.show', ['slug' => $club->slug, 'id' => $achievement->id]) }}" class="flex gap-4 px-5 sm:px-6 py-4 border-b border-slate-50 last:border-b-0 hover:bg-slate-50/60 transition-colors group no-underline text-inherit block">
+                            <div class="flex gap-4 w-full">
+                                <div class="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 overflow-hidden rounded-2xl bg-slate-100">
+                                    @if($achievement->image)
+                                        <img alt="{{ $achievement->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="{{ asset('storage/' . $achievement->image) }}"/>
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center" style="background: var(--accent-light);">
+                                            <svg class="w-6 h-6" style="color: var(--accent);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                                        </div>
+                                    @endif
                                 </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="text-sm font-semibold text-slate-800 group-hover:text-slate-900 transition-colors">{{ $achievement->title }}</div>
-                                    <div class="text-xs text-slate-400 mt-0.5">{{ $achievement->level ?? '' }}</div>
-                                </div>
-                                <div class="flex items-center gap-2 flex-shrink-0">
-                                    <span class="text-[10px] font-bold px-2.5 py-1 rounded-lg hidden sm:inline" style="background: var(--accent-medium); color: var(--accent-text);">{{ $achievement->rank }}</span>
-                                    <span class="text-xs font-bold text-slate-400 tabular-nums">{{ $achievement->year }}</span>
+                                <div class="flex-1 min-w-0 py-0.5">
+                                    <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-lg" style="background: var(--accent-medium); color: var(--accent-text);">{{ $achievement->rank }}</span>
+                                        <span class="text-[10px] font-bold text-slate-400 tabular-nums">Tahun {{ $achievement->year }}</span>
+                                    </div>
+                                    <h3 class="text-sm font-bold text-slate-900 leading-snug mb-1 group-hover:text-blue-600 transition-colors">{{ $achievement->title }}</h3>
+                                    <p class="text-xs text-slate-500 leading-relaxed">{{ $achievement->level ?? '' }}</p>
                                 </div>
                             </div>
                         </a>

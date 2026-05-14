@@ -25,6 +25,15 @@
     {{-- Content --}}
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-16 relative z-10 pb-20">
         <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/60 overflow-hidden reveal">
+
+            {{-- Cover Image --}}
+            @if($achievement->image)
+                <div class="w-full h-56 sm:h-72 lg:h-96 overflow-hidden bg-slate-100">
+                    <img src="{{ asset('storage/' . $achievement->image) }}" alt="{{ $achievement->title }}"
+                         class="w-full h-full object-cover">
+                </div>
+            @endif
+
             <div class="p-6 sm:p-10">
                 <div class="flex items-center gap-3 mb-6">
                     <span class="inline-flex text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
